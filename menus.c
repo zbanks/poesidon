@@ -13,15 +13,45 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 #define DOGE_WATER_DATA SPLASH_DATA
 #define DOGE_WATER_IMAGE SPLASH_IMAGE
 
-void render_menu() {
+#define RAINBOW_PERIOD 100
+
+// The main settings menu
+void menu_main_init();
+void menu_main_run();
+
+// The splash screen
+void menu_splash_init();
+void menu_splash_run();
+
+int splash_timeout;
+
+typedef struct {
+  void (* const init)();
+  void (* const run)();
+} state_t;
+
+const state_t menu_main = {&menu_main_init,&menu_main_run};
+const state_t menu_splash = {&menu_splash_init,&menu_splash_run};
+
+state_t const* state;
+
+btn_t buttons,buttons_edge;
+
+void init_menu()
+{
+  state=&menu_splash;
+  state->init();
+}
+
+void render_menu()
+{
     // The main function to render the current menu 
-    static menu_state_t state = MENU_SPLASH;
-    menu_state_t new_state;
+    state_t const* old_state;
+
     static uint8_t konami_counter = 0;
-    
     static btn_t last_buttons = 0x00;
-    btn_t buttons = read_buttons_debounced();
-    btn_t buttons_edge = buttons & ~last_buttons;
+    buttons = read_buttons_debounced();
+    buttons_edge = buttons & ~last_buttons;
     last_buttons = buttons;
 
     if(buttons_edge){
@@ -33,52 +63,75 @@ void render_menu() {
         }
     }
 
-    switch(state){
-        case MENU_MAIN:
-            new_state = menu_main(buttons_edge);
+  old_state=state;
+  state->run();
+  if(state != old_state)
+  {
+    state->init();
+  }
+}
+
+void menu_main_init()
+{
+  lcd_blit_mem(0, 0, DOGE_WATER_IMAGE);
+  lcd_blit_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_RED);
+  lcd_blit_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_CYAN);
+  lcd_blit_sprite(40, 30, TXT_SUCH_SPEED_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_YELLOW);
+  lcd_blit_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_GREEN);
+}
+
+void menu_main_redraw(uint8_t selection)
+{
+    switch(selection){
+        case 0:
+            lcd_blit_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t*) DOGE_WATER_DATA,  COLOR_RED);
         break;
-        case MENU_SPLASH:
-            new_state = menu_splash(buttons);
+        case 1:
+            lcd_blit_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_CYAN);
         break;
-        default:
-            new_state = MENU_SPLASH;
+        case 2:
+            lcd_blit_sprite(40, 30, TXT_SUCH_SPEED_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_YELLOW);
         break;
-    }
-    if(new_state != MENU_SELF){
-        state = new_state;
+        case 3:
+            lcd_blit_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_GREEN);
+        break;
     }
 }
 
-menu_state_t menu_main(btn_t buttons){
+void menu_main_run()
+{
     // The main settings menu
     static uint8_t force_redraw = 1;
     static uint8_t selection = 0;
-    static uint8_t rainbow_ctr = 0;
+
     /* 
         Speed -- Such Speed
         Depth -- Much Length
         Shape --  Bright Laser
         Go -- Wow
     */
+    
+    // Much divison
+    // Very sad
+    int rainbow_ctr = (time/RAINBOW_PERIOD) % sizeof(RAINBOW);
 
-    if(buttons & BUTTON_DOWN){
-        if(selection < 3){
+    if(buttons_edge & BUTTON_DOWN){
+        if(selection < 3) {
+            menu_main_redraw(selection);
             selection++;
-            force_redraw = 1;
         }
     }
 
-    if(buttons & BUTTON_UP){
+    if(buttons_edge & BUTTON_UP){
         if(selection > 0){
+            menu_main_redraw(selection);
             selection--;
-            force_redraw = 1;
         }
     }
 
-    if(buttons & BUTTON_A){
+    if(buttons_edge & BUTTON_A){
         //TODO
-        force_redraw = 1;
-        return MENU_MAIN;
+        return;
     }
 
     if(force_redraw){
@@ -110,26 +163,23 @@ menu_state_t menu_main(btn_t buttons){
             selection = 0;
         break;
     }
-    
-    rainbow_ctr = (rainbow_ctr + 1) % sizeof(RAINBOW);
 
-    return MENU_SELF;
+    return;
 }
 
-menu_state_t menu_splash(btn_t buttons){
-    // The splash screen
-    static uint16_t timeout = MENU_SPLASH_TIMEOUT;
+void menu_splash_init()
+{
+  splash_timeout=2000;
+  lcd_blit_mem(0, 0, SPLASH_IMAGE);
+}
 
-    if(timeout == MENU_SPLASH_TIMEOUT){
-        lcd_blit_mem(0, 0, SPLASH_IMAGE);
-    }else{
-        lcd_blit_sprite(7, 23, SPLASH_TXT_IMAGE, (uint8_t*) SPLASH_DATA, RAINBOW[timeout % sizeof(RAINBOW)]);
-        // cycle colors or some shit
-    }
+void menu_splash_run()
+{
+  int rainbow_ctr = (time/RAINBOW_PERIOD) % sizeof(RAINBOW);
+  lcd_blit_sprite(7, 23, SPLASH_TXT_IMAGE, (uint8_t*) SPLASH_DATA, RAINBOW[rainbow_ctr]);
 
-    if((!timeout--) || (buttons & BUTTON_A)){
-        timeout = MENU_SPLASH_TIMEOUT;
-        return MENU_MAIN;
-    }
-    return MENU_SELF;
+  if((!splash_timeout--) || (buttons & BUTTON_A))
+  {
+      state=&menu_main;
+  }
 }

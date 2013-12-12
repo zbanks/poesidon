@@ -4,21 +4,18 @@
 #include "images.h"
 #include "menus.h"
 
-uint32_t time=0;
-
 int main(void)
 {
   hardware_init();
   busy_wait(1000000);
   init_lcd();
   
+  init_menu();
   for(;;)
   {
       render_menu();
-      busy_wait(100000);
   }
 }
-
 
   /*
   set_laser(0);
