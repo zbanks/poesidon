@@ -23,6 +23,7 @@ with open("images.h", "w") as fh:
             fc.write("const uint8_t {0}_DATA[{1}] = {{{2}}};\n".format(varname,im.size[0]*im.size[1],pixels))
             fc.write("\n")
 
+            fh.write("#define {0}_IMAGE {0}_WIDTH,{0}_HEIGHT,(uint8_t*){0}_DATA\n".format(varname))
             fh.write("extern const uint8_t {0}_WIDTH;\n".format(varname))
             fh.write("extern const uint8_t {0}_HEIGHT;\n".format(varname))
             fh.write("extern const uint8_t {0}_DATA[{1}];\n".format(varname,im.size[0]*im.size[1]))
