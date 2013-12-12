@@ -2,6 +2,8 @@
 #include <hal.h>
 
 #define MENU_SPLASH_TIMEOUT 30
+#define SPLASH_IMAGE SPLASH_WIDTH,SPLASH_HEIGHT,(uint8_t*)SPLASH_DATA
+#define SPLASH_TXT_SPRITE SPLASH_TXT_WIDTH,SPLASH_TXT_HEIGHT,(uint8_t*)SPLASH_TXT_DATA
 
 void render_menu(){
     // The main function to render the current menu 
@@ -71,10 +73,10 @@ menu_state_t menu_main(btn_t buttons){
     if(force_redraw){
         //TODO: Draw the background image
         lcd_blt_background(0, 0, DOGE_WATER_IMAGE);
-        lcd_blt_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, COLOR_RED);
-        lcd_blt_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, COLOR_CYAN);
-        lcd_blt_sprite(40, 30, TXT_SUCH SPEED_IMAGE, COLOR_YELLOW);
-        lcd_blt_sprite(10, 90, TXT_WOW_IMAGE, COLOR_GREEN);
+        lcd_blt_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_RED);
+        lcd_blt_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_CYAN);
+        lcd_blt_sprite(40, 30, TXT_SUCH SPEED_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_YELLOW);
+        lcd_blt_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_GREEN);
 
         force_redraw = 0;
     }
@@ -82,16 +84,16 @@ menu_state_t menu_main(btn_t buttons){
     // Draw selection in rainbow
     switch(selection){
         case 0:
-            lcd_blt_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t) RAINBOW[rainbow_ctr]);
+            lcd_blt_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t*) DOGE_WATER_DATA, (uint8_t*) RAINBOW[rainbow_ctr]);
         break;
         case 1:
-            lcd_blt_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t) RAINBOW[rainbow_ctr]);
+            lcd_blt_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t*) DOGE_WATER_DATA, (uint8_t*) RAINBOW[rainbow_ctr]);
         break;
         case 2:
-            lcd_blt_sprite(40, 30, TXT_SUCH SPEED_IMAGE, (uint8_t) RAINBOW[rainbow_ctr]);
+            lcd_blt_sprite(40, 30, TXT_SUCH SPEED_IMAGE, (uint8_t*) DOGE_WATER_DATA, (uint8_t*) RAINBOW[rainbow_ctr]);
         break;
         case 3:
-            lcd_blt_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t) RAINBOW[rainbow_ctr]);
+            lcd_blt_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t*) DOGE_WATER_DATA, (uint8_t*) RAINBOW[rainbow_ctr]);
         break;
         default:
             selection = 0;
@@ -108,7 +110,7 @@ menu_state_t menu_splash(btn_t buttons){
     if(timeout == MENU_SPLASH_TIMEOUT){
         lcd_blit_mem(0, 0, SPLASH_IMAGE);
     }else{
-        lcd_blit_sprite(7, 23, SPLASH_TXT_SPRITE);
+        lcd_blit_sprite(7, 23, SPLASH_TXT_SPRITE, (uint8_t) SPLASH_DATA);
         // cycle colors or some shit
     }
 
