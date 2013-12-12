@@ -8,6 +8,13 @@
 
 #define LCD_PACK(x,y) ((uint16_t)((x)<<8) | (y))
 
+#define BUTTON_A (1 << 5)
+#define BUTTON_B (1 << 6)
+#define BUTTON_UP (1 << 0)
+#define BUTTON_DOWN (1 << 3)
+#define BUTTON_LEFT (1 << 2)
+#define BUTTON_RIGHT (1 << 1)
+
 void hardware_init();
 void set_laser_pos(int x,int y);
 void set_laser(uint8_t on);
