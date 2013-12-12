@@ -967,6 +967,9 @@
       <name>$PROJ_DIR$\..\main.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\menus.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\project.c</name>
     </file>
     <file>

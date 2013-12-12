@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 // File: 'splash.png'
 #define SPLASH_IMAGE SPLASH_WIDTH,SPLASH_HEIGHT,(uint8_t*)SPLASH_DATA
 extern const uint8_t SPLASH_WIDTH;

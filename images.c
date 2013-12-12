@@ -1,3 +1,5 @@
+#include "images.h"
+
 // File: 'splash.png'
 const uint8_t SPLASH_WIDTH = 130;
 const uint8_t SPLASH_HEIGHT = 130;
