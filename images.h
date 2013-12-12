@@ -1,14 +1,30 @@
-#include <stdint.h>
+#include <stdint.h>// File: 'images/splash.png'
+#define IMAGES/SPLASH_IMAGE IMAGES/SPLASH_WIDTH,IMAGES/SPLASH_HEIGHT,(uint8_t*)IMAGES/SPLASH_DATA
+extern const uint8_t IMAGES/SPLASH_WIDTH;
+extern const uint8_t IMAGES/SPLASH_HEIGHT;
+extern const uint8_t IMAGES/SPLASH_DATA[16900];
 
-// File: 'splash.png'
-#define SPLASH_IMAGE SPLASH_WIDTH,SPLASH_HEIGHT,(uint8_t*)SPLASH_DATA
-extern const uint8_t SPLASH_WIDTH;
-extern const uint8_t SPLASH_HEIGHT;
-extern const uint8_t SPLASH_DATA[16900];
+// File: 'images/txt_bright_laser.png'
+#define IMAGES/TXT_BRIGHT_LASER_IMAGE IMAGES/TXT_BRIGHT_LASER_WIDTH,IMAGES/TXT_BRIGHT_LASER_HEIGHT,(uint8_t*)IMAGES/TXT_BRIGHT_LASER_DATA
+extern const uint8_t IMAGES/TXT_BRIGHT_LASER_WIDTH;
+extern const uint8_t IMAGES/TXT_BRIGHT_LASER_HEIGHT;
+extern const uint8_t IMAGES/TXT_BRIGHT_LASER_DATA[1139];
 
-// File: 'doge_water.png'
-#define DOGE_WATER_IMAGE DOGE_WATER_WIDTH,DOGE_WATER_HEIGHT,(uint8_t*)DOGE_WATER_DATA
-extern const uint8_t DOGE_WATER_WIDTH;
-extern const uint8_t DOGE_WATER_HEIGHT;
-extern const uint8_t DOGE_WATER_DATA[16900];
+// File: 'images/txt_much_length.png'
+#define IMAGES/TXT_MUCH_LENGTH_IMAGE IMAGES/TXT_MUCH_LENGTH_WIDTH,IMAGES/TXT_MUCH_LENGTH_HEIGHT,(uint8_t*)IMAGES/TXT_MUCH_LENGTH_DATA
+extern const uint8_t IMAGES/TXT_MUCH_LENGTH_WIDTH;
+extern const uint8_t IMAGES/TXT_MUCH_LENGTH_HEIGHT;
+extern const uint8_t IMAGES/TXT_MUCH_LENGTH_DATA[1105];
+
+// File: 'images/txt_such_speed.png'
+#define IMAGES/TXT_SUCH_SPEED_IMAGE IMAGES/TXT_SUCH_SPEED_WIDTH,IMAGES/TXT_SUCH_SPEED_HEIGHT,(uint8_t*)IMAGES/TXT_SUCH_SPEED_DATA
+extern const uint8_t IMAGES/TXT_SUCH_SPEED_WIDTH;
+extern const uint8_t IMAGES/TXT_SUCH_SPEED_HEIGHT;
+extern const uint8_t IMAGES/TXT_SUCH_SPEED_DATA[986];
+
+// File: 'images/txt_wow.png'
+#define IMAGES/TXT_WOW_IMAGE IMAGES/TXT_WOW_WIDTH,IMAGES/TXT_WOW_HEIGHT,(uint8_t*)IMAGES/TXT_WOW_DATA
+extern const uint8_t IMAGES/TXT_WOW_WIDTH;
+extern const uint8_t IMAGES/TXT_WOW_HEIGHT;
+extern const uint8_t IMAGES/TXT_WOW_DATA[374];
 
