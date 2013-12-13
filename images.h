@@ -7,10 +7,10 @@
 extern const uint8_t CIRCLE_DATA[800];
 
 // Bitmap File: 'images/doge_water.png'
-#define DOGE_WATER_IMAGE DOGE_WATER_WIDTH,DOGE_WATER_HEIGHT,(uint8_t*)DOGE_WATER_DATA
+#define DOGE_WATER_IMAGE DOGE_WATER_WIDTH,DOGE_WATER_HEIGHT,(uint8_t*)DOGE_WATER_OFFSET
 #define DOGE_WATER_WIDTH (130)
 #define DOGE_WATER_HEIGHT (130)
-extern const uint8_t DOGE_WATER_DATA[16900];
+#define DOGE_WATER_OFFSET (0x0)
 
 // Sprite File: 'images/dot.spng'
 #define DOT_IMAGE DOT_WIDTH,DOT_HEIGHT,(uint8_t*)DOT_DATA
@@ -25,16 +25,16 @@ extern const uint8_t DOT_DATA[800];
 extern const uint8_t LINE_DATA[1600];
 
 // Bitmap File: 'images/poesidon_doge_1.png'
-#define POESIDON_DOGE_1_IMAGE POESIDON_DOGE_1_WIDTH,POESIDON_DOGE_1_HEIGHT,(uint8_t*)POESIDON_DOGE_1_DATA
+#define POESIDON_DOGE_1_IMAGE POESIDON_DOGE_1_WIDTH,POESIDON_DOGE_1_HEIGHT,(uint8_t*)POESIDON_DOGE_1_OFFSET
 #define POESIDON_DOGE_1_WIDTH (130)
 #define POESIDON_DOGE_1_HEIGHT (130)
-extern const uint8_t POESIDON_DOGE_1_DATA[16900];
+#define POESIDON_DOGE_1_OFFSET (0x4400)
 
 // Bitmap File: 'images/splash.png'
-#define SPLASH_IMAGE SPLASH_WIDTH,SPLASH_HEIGHT,(uint8_t*)SPLASH_DATA
+#define SPLASH_IMAGE SPLASH_WIDTH,SPLASH_HEIGHT,(uint8_t*)SPLASH_OFFSET
 #define SPLASH_WIDTH (130)
 #define SPLASH_HEIGHT (130)
-extern const uint8_t SPLASH_DATA[16900];
+#define SPLASH_OFFSET (0x8800)
 
 // Sprite File: 'images/splash_txt.spng'
 #define SPLASH_TXT_IMAGE SPLASH_TXT_WIDTH,SPLASH_TXT_HEIGHT,(uint8_t*)SPLASH_TXT_DATA
@@ -49,16 +49,16 @@ extern const uint8_t SPLASH_TXT_DATA[3283];
 extern const uint8_t SQUARE_DATA[800];
 
 // Bitmap File: 'images/swimming.png'
-#define SWIMMING_IMAGE SWIMMING_WIDTH,SWIMMING_HEIGHT,(uint8_t*)SWIMMING_DATA
+#define SWIMMING_IMAGE SWIMMING_WIDTH,SWIMMING_HEIGHT,(uint8_t*)SWIMMING_OFFSET
 #define SWIMMING_WIDTH (130)
 #define SWIMMING_HEIGHT (130)
-extern const uint8_t SWIMMING_DATA[16900];
+#define SWIMMING_OFFSET (0xcc00)
 
 // Bitmap File: 'images/tpayne.png'
-#define TPAYNE_IMAGE TPAYNE_WIDTH,TPAYNE_HEIGHT,(uint8_t*)TPAYNE_DATA
+#define TPAYNE_IMAGE TPAYNE_WIDTH,TPAYNE_HEIGHT,(uint8_t*)TPAYNE_OFFSET
 #define TPAYNE_WIDTH (130)
 #define TPAYNE_HEIGHT (130)
-extern const uint8_t TPAYNE_DATA[16900];
+#define TPAYNE_OFFSET (0x11000)
 
 // Sprite File: 'images/txt_0.spng'
 #define TXT_0_IMAGE TXT_0_WIDTH,TXT_0_HEIGHT,(uint8_t*)TXT_0_DATA

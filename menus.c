@@ -124,8 +124,7 @@ void init_menu(){
 void render_menu()
 {
     // The main function to render the current menu 
-    state_t const* old_state;
-
+    static state_t const* old_state;
     static uint8_t konami_counter = 0;
     static btn_t last_buttons = 0x00;
     buttons = read_buttons_debounced();
@@ -141,15 +140,17 @@ void render_menu()
         if(konami_counter == 10){
             //TODO
             konami_counter = 0;
+            state = &menu_konami;
         }
     }
 
-  old_state=state;
-  state->run();
   if(state != old_state)
   {
     state->init();
   }
+
+  old_state=state;
+  state->run();
 }
 
 
