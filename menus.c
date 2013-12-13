@@ -1,6 +1,8 @@
 #include <menus.h>
 #include <hal.h>
 #include <images.h>
+#include "project.h"
+#include "numbers.h"
 
 uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 
@@ -44,6 +46,7 @@ void menu_konami_run();
 // Run
 void menu_wow_init();
 void menu_wow_run();
+void menu_wow_deinit();
 
 int splash_timeout;
 
@@ -103,7 +106,7 @@ inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t co
 
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
-shape_t setting_laser_shape = CIRCLE;
+shape_t setting_laser_shape = LINE;
 int setting_depth = 10;
 int setting_length = 100;
 int setting_speed = 60;
@@ -384,17 +387,18 @@ void menu_wow_run()
 {
   static int wow_last_time=-1;
   int wow_time;
-  
+
   wow_time=(time-wow_start_time)/1000;
   if(wow_time != wow_last_time)
   {
-    blit_number(10,10,wow_time,WOW_BG_DATA,0);
+    blit_number(10,10,wow_time,(uint8_t*)WOW_BG_DATA,0);
   }
 
   project(setting_laser_shape,setting_depth,setting_length,setting_speed,time-wow_start_time);
   
   if(buttons & BUTTON_B)
   {
+    menu_wow_deinit();
     state=&menu_main;
   }
 }
