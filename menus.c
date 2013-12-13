@@ -58,13 +58,13 @@ enum sprite_names {
 };
 
 const sprite_t sprites[] = {
-  {100, 20, TXT_BRIGHT_LASER_IMAGE, COLOR_RED},
-  {70, 80, TXT_MUCH_LENGTH_IMAGE, COLOR_CYAN},
-  {40, 30, TXT_SUCH_SPEED_IMAGE, COLOR_YELLOW},
-  {10, 90, TXT_WOW_IMAGE, COLOR_GREEN},
-  {100, 10, CIRCLE_IMAGE, COLOR_GREEN},
-  {93, 60, DOT_IMAGE, COLOR_GREEN},
-  {42, 8, LINE_IMAGE, COLOR_GREEN},
+  {110, 10, TXT_BRIGHT_LASER_IMAGE, COLOR_RED},
+  {90, 48, TXT_MUCH_LENGTH_IMAGE, COLOR_GREEN},
+  {25, 20, TXT_SUCH_SPEED_IMAGE, COLOR_BLUE},
+  {10, 90, TXT_WOW_IMAGE, COLOR_ORANGE},
+  {80, 20, CIRCLE_IMAGE, COLOR_GREEN},
+  {50, 70, DOT_IMAGE, COLOR_GREEN},
+  {10, 25, LINE_IMAGE, COLOR_GREEN},
 };
 
 enum laser_shape setting_laser_shape;
@@ -182,20 +182,20 @@ void menu_laser_run(){
 
     draw_sprite_color(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA, rainbow_color);
 
-    if(buttons & (BUTTON_DOWN | BUTTON_RIGHT)){
+    if(buttons_edge & (BUTTON_DOWN | BUTTON_RIGHT)){
         if(setting_laser_shape < LAST_SHAPE){
             draw_sprite(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA);
             setting_laser_shape++;
         }
     }
-    if(buttons & (BUTTON_UP | BUTTON_LEFT)){
+    if(buttons_edge & (BUTTON_UP | BUTTON_LEFT)){
         if(setting_laser_shape > 0){
             draw_sprite(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA);
             setting_laser_shape--;
         }
     }
 
-    if(buttons & (BUTTON_A | BUTTON_B)){
+    if(buttons_edge & (BUTTON_A | BUTTON_B)){
         state = &menu_main;
         return;
     }
