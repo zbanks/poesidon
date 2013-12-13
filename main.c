@@ -9,6 +9,7 @@ int main(void)
 {
   hardware_init();
 
+  /*
   set_laser(0);
 
   //busy_wait(1000000);
@@ -35,6 +36,7 @@ int main(void)
     lcd_blit_sprite(7,23,SPLASH_TXT_WIDTH,SPLASH_TXT_HEIGHT,(uint8_t*)SPLASH_TXT_DATA,(uint8_t*)SPLASH_DATA,RAINBOW[i%sizeof(RAINBOW)]);
     busy_wait(100000);
   }
+  */
 }
 
 /*

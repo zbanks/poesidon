@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 typedef uint8_t btn_t;
 typedef enum {
     MENU_SELF,
@@ -16,9 +18,9 @@ typedef enum {
 #define COLOR_BLACK 0x00
 
 // The main function to render the current menu 
-void render_menu(btn_t);
+void render_menu(void);
 
 // The main settings menu
-void menu_main(btn_t);
+menu_state_t menu_main(btn_t);
 // The splash screen
-void menu_splash(btn_t);
+menu_state_t menu_splash(btn_t);
