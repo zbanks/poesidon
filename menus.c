@@ -116,9 +116,12 @@ void render_menu()
     if(buttons_edge){
         if(buttons_edge == konami_code[konami_counter]){
             konami_counter++;
+        }else{
+            konami_counter = 0;
         }
         if(konami_counter == 10){
             //TODO
+            konami_counter = 0;
         }
     }
 
