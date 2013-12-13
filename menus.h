@@ -14,10 +14,10 @@ typedef uint8_t btn_t;
 
 // Global settings
 enum laser_shape {
-    LINE,
     CIRCLE,
     DOT,
-    LAST_SHAPE = DOT
+    LINE,
+    LAST_SHAPE = LINE
 };
 
 enum laser_shape setting_laser_shape;

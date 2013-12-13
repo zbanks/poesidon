@@ -9,8 +9,8 @@ def condense(r,g,b,a=0):
 
 with open("images.h", "w") as fh:
     with open("images.c", "w") as fc:
-        fc.write("#include <images.h>\n")
-        fh.write("#include <stdint.h>\n")
+        fc.write("#include <images.h>\n\n")
+        fh.write("#include <stdint.h>\n\n")
         for fname in sys.argv[1:]:
             fh.write("// File: '{}'\n".format(fname))
             fc.write("// File: '{}'\n".format(fname))
