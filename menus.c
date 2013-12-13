@@ -12,6 +12,8 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 //FIXME:
 #define LASER_BG_IMAGE SPLASH_IMAGE
 #define LASER_BG_DATA SPLASH_DATA
+#define WOW_BG_IMAGE SPLASH_IMAGE
+#define WOW_BG_DATA SPLASH_DATA
 
 
 // The main settings menu
@@ -43,6 +45,10 @@ void menu_splash_run();
 void menu_konami_init();
 void menu_konami_run();
 
+// Run
+void menu_wow_init();
+void menu_wow_run();
+
 int splash_timeout;
 
 typedef struct {
@@ -57,6 +63,7 @@ const state_t menu_speed = {&menu_speed_init,&menu_speed_run};
 const state_t menu_run = {&menu_run_init,&menu_run_run};
 const state_t menu_splash = {&menu_splash_init,&menu_splash_run};
 const state_t menu_konami = {&menu_konami_init,&menu_konami_run};
+const state_t menu_wow = {&menu_wow_init,&menu_wow_run};
 
 state_t const* state;
 
@@ -94,9 +101,9 @@ inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t co
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
 enum laser_shape setting_laser_shape;
-uint8_t setting_depth;
-uint8_t setting_length;
-uint8_t setting_speed;
+int setting_depth;
+int setting_length;
+int setting_speed;
 
 // Begin Functions
 
@@ -144,7 +151,7 @@ void menu_main_init()
   int i;
   for(i=0;i<4;i++)
   {
-    menu_main_redraw(i); &
+    menu_main_redraw(i);
   }
 }
 
@@ -185,6 +192,8 @@ void menu_main_run()
         }
     }
 
+    // Draw selection in rainbow
+    draw_sprite_color(selection, DOGE_WATER_DATA, RAINBOW[rainbow_ctr]);
     if(buttons_edge & BUTTON_A){
         switch(selection){
             case 0:
@@ -200,13 +209,7 @@ void menu_main_run()
                 state = &menu_run;
             break;
         }
-        return;
     }
-
-    // Draw selection in rainbow
-    draw_sprite_color(selection, DOGE_WATER_DATA, RAINBOW[rainbow_ctr]);
-
-    return;
 }
 
 void menu_laser_init(){
@@ -282,4 +285,17 @@ void menu_konami_init(){
 void menu_konami_run(){
     //TODO
     state = &menu_main;
+}
+
+void menu_wow_init()
+{
+  lcd_blit_mem(0, 0, WOW_BG_IMAGE);
+}
+
+void menu_wow_run()
+{
+  if(buttons & BUTTON_B)
+  {
+    state=&menu_main;
+  }
 }
