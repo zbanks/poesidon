@@ -172,9 +172,9 @@ void send_screen_array(uint16_t* datum,int n)
 void reset_screen()
 {
   GPIO_ResetBits(GPIOA,GPIO_Pin_5);
-  busy_wait(1000);
+  busy_wait(1000000);
   GPIO_SetBits(GPIOA,GPIO_Pin_5);
-  busy_wait(1000);
+  busy_wait(100000);
 }
 
 void busy_wait(__IO uint32_t nCount)
@@ -246,7 +246,7 @@ static const uint16_t lcd_init[]={
   LCD_PACK(lctCmd, SLPOUT),	// Sleep Out (exit sleep mode)
 
   LCD_PACK(lctCmd, VOLCTR),	// Electronic Volume Control (brightness/contrast)
-  LCD_PACK(lctData, 28),
+  LCD_PACK(lctData, 55),
   LCD_PACK(lctData, 3),
 
   LCD_PACK(lctCmd, TMPGRD),
@@ -307,7 +307,7 @@ void init_lcd()
 
   send_screen_array((uint16_t*)lcd_init,sizeof(lcd_init)/sizeof(lcd_init[0]));
 
-  busy_wait(1000);
+  busy_wait(100000);
   
   send_screen_byte(LCD_PACK(lctCmd, DISON));
 }
