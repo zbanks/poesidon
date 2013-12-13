@@ -21,6 +21,9 @@ enum laser_shape {
 };
 
 extern enum laser_shape setting_laser_shape;
+extern uint8_t setting_depth;
+extern uint8_t setting_length;
+extern uint16_t setting_speed;
 
 // The main function to render the current menu 
 void init_menu();

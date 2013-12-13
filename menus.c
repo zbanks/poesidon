@@ -22,9 +22,25 @@ void menu_main_run();
 void menu_laser_init();
 void menu_laser_run();
 
+// The length/depth settings menu
+void menu_length_init();
+void menu_length_run();
+
+// The speed settings menu
+void menu_speed_init();
+void menu_speed_run();
+
+// The operating state + laser
+void menu_run_init();
+void menu_run_run();
+
 // The splash screen
 void menu_splash_init();
 void menu_splash_run();
+
+// The konami code
+void menu_konami_init();
+void menu_konami_run();
 
 int splash_timeout;
 
@@ -35,7 +51,11 @@ typedef struct {
 
 const state_t menu_main = {&menu_main_init,&menu_main_run};
 const state_t menu_laser = {&menu_laser_init,&menu_laser_run};
+const state_t menu_length = {&menu_length_init,&menu_length_run};
+const state_t menu_speed = {&menu_speed_init,&menu_speed_run};
+const state_t menu_run = {&menu_run_init,&menu_run_run};
 const state_t menu_splash = {&menu_splash_init,&menu_splash_run};
+const state_t menu_konami = {&menu_konami_init,&menu_konami_run};
 
 state_t const* state;
 
@@ -67,7 +87,12 @@ const sprite_t sprites[] = {
   {42, 8, LINE_IMAGE, COLOR_GREEN},
 };
 
+const uint8_t konami_code = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_LEFT, BUTTON_B, BUTTON_A};
+
 enum laser_shape setting_laser_shape;
+uint8_t setting_depth;
+uint8_t setting_length;
+uint8_t setting_speed;
 
 // Begin Functions
 
@@ -89,8 +114,8 @@ void render_menu()
     last_buttons = buttons;
 
     if(buttons_edge){
-        switch(konami_counter){
-            //TODO
+        if(buttons_edge == konami_code[konami_counter]){
+            konami_counter++;
         }
         if(konami_counter == 10){
             //TODO
@@ -114,7 +139,7 @@ void menu_main_init()
   int i;
   for(i=0;i<4;i++)
   {
-    menu_main_redraw(i);
+    menu_main_redraw(i); &
   }
 }
 
