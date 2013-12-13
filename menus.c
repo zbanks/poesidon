@@ -95,10 +95,10 @@ inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t co
 
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
-enum laser_shape setting_laser_shape;
-int setting_depth;
-int setting_length;
-int setting_speed;
+enum laser_shape setting_laser_shape = CIRCLE;
+int setting_depth = 0;
+int setting_length = 100;
+int setting_speed = 60;
 
 // Begin Functions
 
