@@ -9,12 +9,9 @@ int main(void)
   hardware_init();
   busy_wait(100000);
   init_lcd();
-  
-  //sd_read();
-  //for(;;);
-  
+  init_sd();
+
   init_menu();
-  for(;;)
   {
       render_menu();
   }

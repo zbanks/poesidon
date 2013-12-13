@@ -3,6 +3,7 @@
 #include "stm32f10x_usart.h"
 #include "stm32f10x_spi.h"
 #include "hal.h"
+#include "sd.h"
 
 GPIO_InitTypeDef GPIO_InitStructure;
 TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
@@ -426,6 +427,37 @@ void lcd_blit_sprite(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint8_t* img,uint
   GPIO_SetBits(GPIOA,GPIO_Pin_3);  
 }
 
+void lcd_blit_sd(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint32_t addr)
+{
+  int i;
+  uint32_t reversed;
+  int n=dx*dy;
+  uint8_t img;
+  static uint8_t sd_buffer[512];
+  uint16_t byte_ctr=512;
+
+  lcd_setup_write(x,y,dx,dy);
+
+  GPIO_ResetBits(GPIOA,GPIO_Pin_3);
+
+  
+  for(i=0;i<n;i++)
+  {
+    if(byte_ctr==512)
+    {
+      byte_ctr=0;
+      SD_ReadBlock(sd_buffer,addr,512);
+      addr+=512;
+    }
+    asm("rbit %0, %1\n" : "=r"(reversed) : "r"(LCD_PACK(lctData,sd_buffer[byte_ctr++])));
+    USART_SendData(USART2, (uint16_t)(reversed>>23));
+    while(!USART_GetFlagStatus(USART2, USART_FLAG_TXE));
+  }
+
+  while(!USART_GetFlagStatus(USART2, USART_FLAG_TC));
+  GPIO_SetBits(GPIOA,GPIO_Pin_3);  
+}
+
 uint8_t read_buttons()
 {
   return ~GPIO_ReadInputData(GPIOC) & 0x3F;
@@ -460,6 +492,11 @@ uint8_t read_buttons_debounced()
     }
   }
   return debounced;
+}
+
+void init_sd()
+{
+  SD_Init();
 }
 
 /*
