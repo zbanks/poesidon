@@ -4,6 +4,7 @@ typedef enum {
     CIRCLE,
     DOT,
     LINE,
+    SQUARE,
     LAST_SHAPE = LINE
 } shape_t;
 

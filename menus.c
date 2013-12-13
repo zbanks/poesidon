@@ -102,7 +102,7 @@ inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t co
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
 shape_t setting_laser_shape = CIRCLE;
-int setting_depth = 0;
+int setting_depth = 10;
 int setting_length = 100;
 int setting_speed = 60;
 
@@ -261,17 +261,17 @@ void menu_length_run(){
     uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
 
     if(length_state == 0){
-        if(setting_depth == 0){
+        if(setting_depth < 15){
             if(buttons_edge & (BUTTON_DOWN)){
                 draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 1;
+                setting_depth = 10;
             }else{
                 draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, rainbow_color);
             }
         }else{
             if(buttons_edge & (BUTTON_UP)){
                 draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 0;
+                setting_depth = 30;
             }else{
                 draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, rainbow_color);
             }
