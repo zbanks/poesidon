@@ -87,7 +87,7 @@ const sprite_t sprites[] = {
   {10, 25, LINE_IMAGE, COLOR_GREEN},
 };
 
-const uint8_t konami_code = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_LEFT, BUTTON_B, BUTTON_A};
+const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
 enum laser_shape setting_laser_shape;
 uint8_t setting_depth;
