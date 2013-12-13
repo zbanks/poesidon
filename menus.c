@@ -107,8 +107,8 @@ inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t co
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
 shape_t setting_laser_shape = LINE;
-int setting_depth = 10;
-int setting_length = 100;
+int setting_depth = 100;
+int setting_length = 450;
 int setting_speed = 60;
 
 int wow_start_time;
@@ -253,12 +253,17 @@ void menu_laser_run(){
 }
 
 
-void menu_length_init(){
-    lcd_blit_mem(0, 0, LENGTH_BG_IMAGE);
+void menu_length_render(){
     draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
     draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
-    // TODO something for length
+
+    blit_number(10, 10, setting_depth, (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
+}
+
+void menu_length_init(){
+    lcd_blit_mem(0, 0, LENGTH_BG_IMAGE);
     draw_sprite(TXT_HOW_MANY_FEAT_LONG_SPRITE, LENGTH_BG_DATA);
+    menu_length_render();
 
 }
 
@@ -267,17 +272,17 @@ void menu_length_run(){
     uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
 
     if(length_state == 0){
-        if(setting_depth < 15){
+        if(setting_depth < 150){
             if(buttons_edge & (BUTTON_DOWN)){
                 draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 10;
+                setting_depth = 100;
             }else{
                 draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, rainbow_color);
             }
         }else{
             if(buttons_edge & (BUTTON_UP)){
                 draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 30;
+                setting_depth = 300;
             }else{
                 draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, rainbow_color);
             }
@@ -285,7 +290,7 @@ void menu_length_run(){
     }else if(length_state == 1){
         // Hundreds Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length >= 100){
+            if(setting_length > 100){
                 setting_length -= 100;
             }
         }
@@ -298,12 +303,12 @@ void menu_length_run(){
     }else if(length_state == 2){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length >= 10){
+            if(setting_length > 100){
                 setting_length -= 10;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_length < 90){
+            if(setting_length < 990){
                 setting_length += 10;
             }
         }
@@ -311,12 +316,12 @@ void menu_length_run(){
     }else if(length_state == 3){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length >= 1){
+            if(setting_length > 100){
                 setting_length -= 1;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_length < 900){
+            if(setting_length < 999){
                 setting_length += 1;
             }
         }
@@ -325,9 +330,11 @@ void menu_length_run(){
 
     if(buttons_edge & (BUTTON_A | BUTTON_LEFT)){
         length_state = (length_state + 1) % 4;
+        menu_length_render();
     }
     if((buttons_edge & BUTTON_RIGHT) && length_state){
         length_state--;
+        menu_length_render();
     }
     if(buttons_edge & BUTTON_B){
         length_state = 0;
