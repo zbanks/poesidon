@@ -16,3 +16,9 @@
 *.exe
 *.out
 *.app
+
+EWARMv5/GPIOToggle.dep
+EWARMv5/GPIOToggle/
+EWARMv5/GPIOToggleCustomSfr.sfr
+EWARMv5/settings/
+Libraries/
