@@ -374,6 +374,7 @@ void menu_wow_init()
 void menu_wow_deinit()
 {
   set_laser(0);
+  set_laser_pos(PWM_PERIOD/2,PWM_PERIOD/2);
 }
 
 void menu_wow_run()

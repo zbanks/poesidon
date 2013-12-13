@@ -9,8 +9,6 @@ TIM_OCInitTypeDef TIM_OCInitStructure;
 USART_ClockInitTypeDef USART_ClockInitStructure;
 USART_InitTypeDef USART_InitStructure;
 
-#define PWM_PERIOD 10000
-
 uint32_t time=0;
 
 void hardware_init()
