@@ -257,7 +257,7 @@ void menu_length_render(){
     draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
     draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
 
-    blit_number(10, 10, setting_depth, (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
+    blit_number(10, 10, setting_length, (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
 }
 
 void menu_length_init(){
@@ -275,14 +275,14 @@ void menu_length_run(){
         if(setting_depth < 150){
             if(buttons_edge & (BUTTON_DOWN)){
                 draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 100;
+                setting_depth = 300;
             }else{
                 draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, rainbow_color);
             }
         }else{
             if(buttons_edge & (BUTTON_UP)){
                 draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 300;
+                setting_depth = 100;
             }else{
                 draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, rainbow_color);
             }
@@ -396,10 +396,10 @@ void menu_wow_run()
   static uint8_t rainbow_counter=0;
   int wow_time;
 
-  wow_time=(time-wow_start_time)/1000;
+  wow_time=(time-wow_start_time)/(setting_speed*1000);
   if(wow_time != wow_last_time)
   {
-    project(DOT,setting_depth,setting_length,setting_speed,time-wow_start_time); // Hack
+    //project(DOT,setting_depth,setting_length,setting_speed,time-wow_start_time); // Hack
     blit_number(20,10,wow_time,(uint8_t*)WOW_BG_DATA,RAINBOW[rainbow_counter++]);
     if(rainbow_counter>sizeof(RAINBOW))
     {
