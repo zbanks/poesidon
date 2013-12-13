@@ -251,6 +251,7 @@ void menu_laser_run(){
     }
 }
 
+int length_digits[3];
 
 void menu_length_render(){
     uint8_t shallow_color = (setting_depth < 80) ? COLOR_GREEN : COLOR_BLACK;
@@ -276,10 +277,10 @@ void menu_length_init(){
     
 
 }
-int length_digits[3];
 
 void menu_length_run(){
     static uint8_t length_state = 0;
+    int digit_dy;
     uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
 
     // Assume fixed-width font because lazy
