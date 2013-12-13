@@ -33,10 +33,6 @@ void menu_length_run();
 void menu_speed_init();
 void menu_speed_run();
 
-// The operating state + laser
-void menu_run_init();
-void menu_run_run();
-
 // The splash screen
 void menu_splash_init();
 void menu_splash_run();
@@ -60,7 +56,6 @@ const state_t menu_main = {&menu_main_init,&menu_main_run};
 const state_t menu_laser = {&menu_laser_init,&menu_laser_run};
 const state_t menu_length = {&menu_length_init,&menu_length_run};
 const state_t menu_speed = {&menu_speed_init,&menu_speed_run};
-const state_t menu_run = {&menu_run_init,&menu_run_run};
 const state_t menu_splash = {&menu_splash_init,&menu_splash_run};
 const state_t menu_konami = {&menu_konami_init,&menu_konami_run};
 const state_t menu_wow = {&menu_wow_init,&menu_wow_run};
@@ -206,7 +201,7 @@ void menu_main_run()
                 state = &menu_speed;
             break;
             case 3:
-                state = &menu_run;
+                state = &menu_wow;
             break;
         }
     }
@@ -243,13 +238,87 @@ void menu_laser_run(){
     }
 }
 
+
 void menu_length_init(){
+    lcd_blit_mem(0, 0, LENGTH_BG_IMAGE);
+    draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
+    draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
+    // TODO something for length
+    draw_sprite(TXT_HOW_MANY_FEAT_LONG_SPRITE, LENGTH_BG_DATA);
 
 }
 
 void menu_length_run(){
-    //TODO
-    state = &menu_main;
+    static uint8_t length_state = 0;
+    uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
+
+    if(length_state == 0){
+        if(setting_depth == 0){
+            if(button_edge & (BUTTON_DOWN)){
+                draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
+                setting_depth = 1;
+            }else{
+                draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, rainbow_color);
+            }
+        }else{
+            if(button_edge & (BUTTON_UP)){
+                draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
+                setting_depth = 0;
+            }else{
+                draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, rainbow_color);
+            }
+        }
+    }else if(length_state == 1){
+        // Hundreds Digit
+        if(button_edge & BUTTON_DOWN){
+            if(setting_length >= 100){
+                setting_length -= 100;
+            }
+        }
+        if(button_edge & BUTTON_UP){
+            if(setting_length < 900){
+                setting_length += 100;
+            }
+        }
+        // TODO: Rainbow digit
+    }else if(length_state == 2){
+        // Tens Digit
+        if(button_edge & BUTTON_DOWN){
+            if(setting_length % 100 >= 10){
+                setting_length -= 10;
+            }
+        }
+        if(button_edge & BUTTON_UP){
+            if(setting_length % 100 < 90){
+                setting_length += 10;
+            }
+        }
+        // TODO: Rainbow digit
+    }else if(length_state == 3){
+        // Tens Digit
+        if(button_edge & BUTTON_DOWN){
+            if(setting_length % 10 >= 1){
+                setting_length -= 1;
+            }
+        }
+        if(button_edge & BUTTON_UP){
+            if(setting_length % 10 < 900){
+                setting_length += 1;
+            }
+        }
+        // TODO: Rainbow digit
+    }
+
+    if(button_edge & (BUTTON_A | BUTTON_LEFT)){
+        length_state = (length_state + 1) % 4;
+    }
+    if((button_edge & BUTTON_RIGHT) && length_state){
+        length_state--;
+    }
+    if(button_edge & BUTTON_B){
+        length_state = 0;
+        state = &menu_main;
+    }
 }
 
 void menu_speed_init(){
