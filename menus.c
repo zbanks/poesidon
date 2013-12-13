@@ -67,6 +67,8 @@ const sprite_t sprites[] = {
   {42, 8, LINE_IMAGE, COLOR_GREEN},
 };
 
+enum laser_shape setting_laser_shape;
+
 // Begin Functions
 
 void init_menu()
@@ -103,6 +105,9 @@ void render_menu()
   }
 }
 
+void menu_main_redraw(uint8_t i);
+inline void draw_sprite(enum sprite_names s, const uint8_t* bg);
+
 void menu_main_init()
 {
   lcd_blit_mem(0, 0, DOGE_WATER_IMAGE);
@@ -114,7 +119,7 @@ void menu_main_init()
 }
 
 void menu_main_redraw(uint8_t i){
-    draw_sprite(i, DOGE_WATER_IMAGE);
+    draw_sprite(i, DOGE_WATER_DATA);
 }
 
 inline void draw_sprite(enum sprite_names s, const uint8_t* bg)
@@ -166,7 +171,7 @@ void menu_main_run()
 }
 
 void menu_laser_init(){
-    lcd_blit_mem(0, 0, LASER_BG_DATA);
+    lcd_blit_mem(0, 0, LASER_BG_IMAGE);
     draw_sprite(DOT_SPRITE, LASER_BG_DATA);
     draw_sprite(CIRCLE_SPRITE, LASER_BG_DATA);
     draw_sprite(LINE_SPRITE, LASER_BG_DATA);
@@ -175,7 +180,7 @@ void menu_laser_init(){
 void menu_laser_run(){
     uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
 
-    draw_sprite(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA, rainbow_color);
+    draw_sprite_color(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA, rainbow_color);
 
     if(buttons & (BUTTON_DOWN | BUTTON_RIGHT)){
         if(setting_laser_shape < LAST_SHAPE){
