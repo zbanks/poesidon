@@ -13,8 +13,6 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 //FIXME:
 #define LASER_BG_IMAGE SPLASH_IMAGE
 #define LASER_BG_DATA SPLASH_DATA
-#define WOW_BG_IMAGE SPLASH_IMAGE
-#define WOW_BG_DATA SPLASH_DATA
 #define LENGTH_BG_IMAGE SPLASH_IMAGE
 #define LENGTH_BG_DATA SPLASH_DATA
 
@@ -379,7 +377,7 @@ void menu_konami_run(){
 
 void menu_wow_init()
 {
-  lcd_blit_mem(0, 0, WOW_BG_IMAGE);
+  lcd_blit_mem(0, 0, SWIMMING_IMAGE);
   wow_start_time=time;
   set_laser(1);
 }
@@ -400,7 +398,7 @@ void menu_wow_run()
   if(wow_time != wow_last_time)
   {
     //project(DOT,setting_depth,setting_length,setting_speed,time-wow_start_time); // Hack
-    blit_number(20,10,wow_time,(uint8_t*)WOW_BG_DATA,RAINBOW[rainbow_counter++]);
+    blit_number(20,10,wow_time,(uint8_t*)SWIMMING_DATA,RAINBOW[rainbow_counter++]);
     if(rainbow_counter>sizeof(RAINBOW))
     {
       rainbow_counter=0;
