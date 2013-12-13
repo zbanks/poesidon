@@ -24,7 +24,7 @@ int32_t get_mirror_angle(int32_t y,int32_t x)
 {
   if(x>y)
   {
-    return 0;
+    return -ANGLE_ZERO;
   }
 
   int32_t a=fast_arctan(y,x)*(ANGLE_GAIN)/7854-(ANGLE_GAIN+ANGLE_ZERO);
@@ -56,7 +56,7 @@ int32_t square(int32_t amp,int32_t half_period,int32_t time)
 
 void project(shape_t shape,int depth,int length,int speed,int t)
 {
-  int ya=get_mirror_angle(ramp(length*10,speed*1000,t),depth*10);
+  int ya=get_mirror_angle(ramp(length,speed*1000,t),depth);
   int xa=5000;
 
   switch(shape)

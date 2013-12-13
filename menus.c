@@ -11,10 +11,10 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 #define RAINBOW_PERIOD 100
 
 //FIXME:
-#define LASER_BG_IMAGE SPLASH_IMAGE
-#define LASER_BG_DATA SPLASH_DATA
-#define LENGTH_BG_IMAGE SPLASH_IMAGE
-#define LENGTH_BG_DATA SPLASH_DATA
+#define LASER_BG_IMAGE TPAYNE_IMAGE
+#define LASER_BG_DATA TPAYNE_DATA
+#define LENGTH_BG_IMAGE POESIDON_DOGE_1_IMAGE
+#define LENGTH_BG_DATA POESIDON_DOGE_1_DATA
 
 // The main settings menu
 void menu_main_init();
@@ -107,9 +107,10 @@ const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, B
 shape_t setting_laser_shape = LINE;
 int setting_depth = 100;
 int setting_length = 450;
-int setting_speed = 60;
+int setting_speed = 5;
 
 int wow_start_time;
+int wow_last_time;
 
 // Begin Functions
 
@@ -399,6 +400,7 @@ void menu_wow_init()
 {
   lcd_blit_mem(0, 0, SWIMMING_IMAGE);
   wow_start_time=time;
+  wow_last_time=-1;
   set_laser(1);
 }
 
@@ -410,15 +412,13 @@ void menu_wow_deinit()
 
 void menu_wow_run()
 {
-  static int wow_last_time=-1;
   static uint8_t rainbow_counter=0;
   int wow_time;
 
   wow_time=(time-wow_start_time)/(setting_speed*1000);
   if(wow_time != wow_last_time)
   {
-    //project(DOT,setting_depth,setting_length,setting_speed,time-wow_start_time); // Hack
-    blit_number(20,10,wow_time,(uint8_t*)SWIMMING_DATA,RAINBOW[rainbow_counter++]);
+    blit_number(10,50,wow_time,(uint8_t*)SWIMMING_DATA,RAINBOW[rainbow_counter++]);
     if(rainbow_counter>sizeof(RAINBOW))
     {
       rainbow_counter=0;

@@ -162,3 +162,8 @@ extern const uint8_t TXT_SUCH_SPEED_DATA[1242];
 #define TXT_WOW_HEIGHT (25)
 extern const uint8_t TXT_WOW_DATA[450];
 
+// File: 'images/swimming.png'
+#define SWIMMING_IMAGE SWIMMING_WIDTH,SWIMMING_HEIGHT,(uint8_t*)SWIMMING_DATA
+#define SWIMMING_WIDTH (130)
+#define SWIMMING_HEIGHT (130)
+extern const uint8_t SWIMMING_DATA[16900];
