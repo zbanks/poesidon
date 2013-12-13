@@ -38,9 +38,9 @@ extern const uint8_t SPLASH_DATA[16900];
 
 // File: 'images/splash_txt.png'
 #define SPLASH_TXT_IMAGE SPLASH_TXT_WIDTH,SPLASH_TXT_HEIGHT,(uint8_t*)SPLASH_TXT_DATA
-#define SPLASH_TXT_WIDTH (130)
-#define SPLASH_TXT_HEIGHT (130)
-extern const uint8_t SPLASH_TXT_DATA[16900];
+#define SPLASH_TXT_WIDTH (65)
+#define SPLASH_TXT_HEIGHT (101)
+extern const uint8_t SPLASH_TXT_DATA[6565];
 
 // File: 'images/txt_bright_laser.png'
 #define TXT_BRIGHT_LASER_IMAGE TXT_BRIGHT_LASER_WIDTH,TXT_BRIGHT_LASER_HEIGHT,(uint8_t*)TXT_BRIGHT_LASER_DATA

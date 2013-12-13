@@ -95,9 +95,14 @@ void menu_main_init()
   }
 }
 
-void menu_main_redraw(uint8_t s)
+inline void draw_sprite(uint8_t s, uint8_t* bg)
 {
-  lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,(uint8_t*) DOGE_WATER_DATA,sprites[s].color);
+  lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,bg,sprites[s].color);
+}
+
+inline void draw_sprite(uint8_t s, uint8_t* bg, uint8_t color)
+{
+  lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,bg,color);
 }
 
 void menu_main_run()
@@ -129,7 +134,8 @@ void menu_main_run()
     }
 
     // Draw selection in rainbow
-    lcd_blit_sprite(sprites[selection].x,sprites[selection].y,sprites[selection].dx,sprites[selection].dy,sprites[selection].img,(uint8_t*) DOGE_WATER_DATA,RAINBOW[rainbow_ctr]);
+    //lcd_blit_sprite(sprites[selection].x,sprites[selection].y,sprites[selection].dx,sprites[selection].dy,sprites[selection].img,(uint8_t*) DOGE_WATER_DATA,RAINBOW[rainbow_ctr]);
+    draw_sprite_color(selection, DOGE_WATER_DATA, RAINBOW[rainbow_ctr]);
 
     return;
 }
