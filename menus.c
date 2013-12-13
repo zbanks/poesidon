@@ -252,40 +252,39 @@ void menu_laser_run(){
 
 
 void menu_length_render(){
-    draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
-    draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
+    uint8_t shallow_color = (setting_depth < 80) ? COLOR_GREEN : COLOR_BLACK;
+    uint8_t deep_color = (setting_depth > 80) ? COLOR_GREEN : COLOR_BLACK;
+    
+    draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, shallow_color);
+    draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, deep_color);
 
     blit_number(10, 10, setting_length, (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
+}
+
+void menu_length_recalc(){
+    length_digits[0] = setting_length % 10;
+    length_digits[1] = (setting_length / 10) % 10;
+    legnth_digits[2] = (setting_length / 100) % 10; // Shouldn't be more than 9
 }
 
 void menu_length_init(){
     lcd_blit_mem(0, 0, LENGTH_BG_IMAGE);
     draw_sprite(TXT_HOW_MANY_FEAT_LONG_SPRITE, LENGTH_BG_DATA);
+    menu_length_recalc();
     menu_length_render();
+    
 
 }
+int length_digits[3];
 
 void menu_length_run(){
     static uint8_t length_state = 0;
     uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
 
-    if(length_state == 0){
-        if(setting_depth < 150){
-            if(buttons_edge & (BUTTON_DOWN)){
-                draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 300;
-            }else{
-                draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, rainbow_color);
-            }
-        }else{
-            if(buttons_edge & (BUTTON_UP)){
-                draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 100;
-            }else{
-                draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, rainbow_color);
-            }
-        }
-    }else if(length_state == 1){
+    // Assume fixed-width font because lazy
+    digit_dy = digit_img[0].dy * (length_state - 1);
+    
+    if(length_state == 1){
         // Hundreds Digit
         if(buttons_edge & BUTTON_DOWN){
             if(setting_length > 100){
@@ -297,7 +296,6 @@ void menu_length_run(){
                 setting_length += 100;
             }
         }
-        // TODO: Rainbow digit
     }else if(length_state == 2){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
@@ -310,7 +308,6 @@ void menu_length_run(){
                 setting_length += 10;
             }
         }
-        // TODO: Rainbow digit
     }else if(length_state == 3){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
@@ -323,19 +320,42 @@ void menu_length_run(){
                 setting_length += 1;
             }
         }
-        // TODO: Rainbow digit
     }
+
+    if(length_state == 0){
+        if(setting_depth < 80){
+            if(buttons_edge & (BUTTON_DOWN)){
+                draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
+                setting_depth = 100;
+            }else{
+                draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, rainbow_color);
+            }
+        }else{
+            if(buttons_edge & (BUTTON_UP)){
+                draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
+                setting_depth = 50;
+            }else{
+                draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, rainbow_color);
+            }
+        }
+    }else{
+        if(buttons_edge & (BUTTON_DOWN | BUTTON_UP)){
+            menu_length_recalc();
+        }
+        blit_digit(10, 10 + digit_dy, length_digits[length_state -1], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
+    } 
 
     if(buttons_edge & (BUTTON_A | BUTTON_LEFT)){
         length_state = (length_state + 1) % 4;
         menu_length_render();
     }
-    if((buttons_edge & BUTTON_RIGHT) && length_state){
-        length_state--;
+    if((buttons_edge & BUTTON_RIGHT)){
+        length_state = (length_state - 1) % 4;
         menu_length_render();
     }
     if(buttons_edge & BUTTON_B){
         length_state = 0;
+        digit_dy = 0;
         state = &menu_main;
     }
 }
