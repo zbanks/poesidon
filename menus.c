@@ -18,6 +18,7 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 // The main settings menu
 void menu_main_init();
 void menu_main_run();
+void menu_main_redraw(uint8_t s);
 
 // The splash screen
 void menu_splash_init();
@@ -36,6 +37,21 @@ const state_t menu_splash = {&menu_splash_init,&menu_splash_run};
 state_t const* state;
 
 btn_t buttons,buttons_edge;
+
+typedef struct {
+  uint8_t x,y,dx,dy;
+  uint8_t* img;
+  uint8_t color;
+} sprite_t;
+
+const sprite_t sprites[] = {
+  {100, 20, TXT_BRIGHT_LASER_IMAGE, COLOR_RED},
+  {70, 80, TXT_MUCH_LENGTH_IMAGE, COLOR_CYAN},
+  {40, 30, TXT_SUCH_SPEED_IMAGE, COLOR_YELLOW},
+  {10, 90, TXT_WOW_IMAGE, COLOR_GREEN},
+};
+
+// Begin Functions
 
 void init_menu()
 {
@@ -74,43 +90,23 @@ void render_menu()
 void menu_main_init()
 {
   lcd_blit_mem(0, 0, DOGE_WATER_IMAGE);
-  lcd_blit_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_RED);
-  lcd_blit_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_CYAN);
-  lcd_blit_sprite(40, 30, TXT_SUCH_SPEED_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_YELLOW);
-  lcd_blit_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_GREEN);
+  int i;
+  for(i=0;i<4;i++)
+  {
+    menu_main_redraw(i);
+  }
 }
 
-void menu_main_redraw(uint8_t selection)
+void menu_main_redraw(uint8_t s)
 {
-    switch(selection){
-        case 0:
-            lcd_blit_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t*) DOGE_WATER_DATA,  COLOR_RED);
-        break;
-        case 1:
-            lcd_blit_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_CYAN);
-        break;
-        case 2:
-            lcd_blit_sprite(40, 30, TXT_SUCH_SPEED_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_YELLOW);
-        break;
-        case 3:
-            lcd_blit_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_GREEN);
-        break;
-    }
+  lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,(uint8_t*) DOGE_WATER_DATA,sprites[s].color);
 }
 
 void menu_main_run()
 {
     // The main settings menu
-    static uint8_t force_redraw = 1;
     static uint8_t selection = 0;
-
-    /* 
-        Speed -- Such Speed
-        Depth -- Much Length
-        Shape --  Bright Laser
-        Go -- Wow
-    */
-    
+   
     // Much divison
     // Very sad
     int rainbow_ctr = (time/RAINBOW_PERIOD) % sizeof(RAINBOW);
@@ -134,35 +130,8 @@ void menu_main_run()
         return;
     }
 
-    if(force_redraw){
-        //TODO: Draw the background image
-        lcd_blit_mem(0, 0, DOGE_WATER_IMAGE);
-        lcd_blit_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_RED);
-        lcd_blit_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_CYAN);
-        lcd_blit_sprite(40, 30, TXT_SUCH_SPEED_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_YELLOW);
-        lcd_blit_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t*) DOGE_WATER_DATA, COLOR_GREEN);
-
-        force_redraw = 0;
-    }
-
     // Draw selection in rainbow
-    switch(selection){
-        case 0:
-            lcd_blit_sprite(100, 20, TXT_BRIGHT_LASER_IMAGE, (uint8_t*) DOGE_WATER_DATA,  RAINBOW[rainbow_ctr]);
-        break;
-        case 1:
-            lcd_blit_sprite(70, 80, TXT_MUCH_LENGTH_IMAGE, (uint8_t*) DOGE_WATER_DATA, RAINBOW[rainbow_ctr]);
-        break;
-        case 2:
-            lcd_blit_sprite(40, 30, TXT_SUCH_SPEED_IMAGE, (uint8_t*) DOGE_WATER_DATA, RAINBOW[rainbow_ctr]);
-        break;
-        case 3:
-            lcd_blit_sprite(10, 90, TXT_WOW_IMAGE, (uint8_t*) DOGE_WATER_DATA, RAINBOW[rainbow_ctr]);
-        break;
-        default:
-            selection = 0;
-        break;
-    }
+    lcd_blit_sprite(sprites[selection].x,sprites[selection].y,sprites[selection].dx,sprites[selection].dy,sprites[selection].img,(uint8_t*) DOGE_WATER_DATA,RAINBOW[rainbow_ctr]);
 
     return;
 }
