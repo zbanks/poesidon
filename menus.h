@@ -12,6 +12,16 @@ typedef uint8_t btn_t;
 #define COLOR_WHITE 0xFF
 #define COLOR_BLACK 0x00
 
+// Global settings
+enum laser_shape {
+    LINE,
+    CIRCLE,
+    DOT,
+    LAST_SHAPE = DOT
+};
+
+enum laser_shape setting_laser_shape;
+
 // The main function to render the current menu 
 void render_menu();
 

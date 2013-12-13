@@ -167,6 +167,29 @@ void menu_main_run()
     return;
 }
 
+void menu_laser_init(){
+    lcd_blit_mem(0, 0, SPLASH_IMAGE); //FIXME
+}
+
+void menu_laser_run(){
+    int rainbow_ctr = (time/RAINBOW_PERIOD) % sizeof(RAINBOW);
+
+    if(buttons & (BUTTON_DOWN | BUTTON_RIGHT)){
+        if(setting_laser_shape < LAST_SHAPE){
+            setting_laser_shape++;
+        }
+    }
+    if(buttons & (BUTTON_UP | BUTTON_LEFT)){
+        if(setting_laser_shape > 0){
+            setting_laser_shape--;
+        }
+    }
+    if(buttons & (BUTTON_A | BUTTON_B)){
+        state = &menu_main;
+        return;
+    }
+}
+
 void menu_splash_init()
 {
   splash_timeout=2000;
