@@ -386,12 +386,19 @@ void menu_wow_deinit()
 void menu_wow_run()
 {
   static int wow_last_time=-1;
+  static uint8_t rainbow_counter=0;
   int wow_time;
 
   wow_time=(time-wow_start_time)/1000;
   if(wow_time != wow_last_time)
   {
-    blit_number(10,10,wow_time,(uint8_t*)WOW_BG_DATA,0);
+    project(DOT,setting_depth,setting_length,setting_speed,time-wow_start_time); // Hack
+    blit_number(20,10,wow_time,(uint8_t*)WOW_BG_DATA,RAINBOW[rainbow_counter++]);
+    if(rainbow_counter>sizeof(RAINBOW))
+    {
+      rainbow_counter=0;
+    }
+    wow_last_time=wow_time;
   }
 
   project(setting_laser_shape,setting_depth,setting_length,setting_speed,time-wow_start_time);
