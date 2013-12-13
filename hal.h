@@ -13,6 +13,8 @@
 #define BUTTON_A (1 << 4)
 #define BUTTON_B (1 << 5)
 
+#define PWM_PERIOD 10000
+
 extern uint32_t time;
 
 void hardware_init();

@@ -102,7 +102,7 @@ inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t co
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
 shape_t setting_laser_shape = CIRCLE;
-int setting_depth = 0;
+int setting_depth = 10;
 int setting_length = 100;
 int setting_speed = 60;
 
@@ -374,6 +374,7 @@ void menu_wow_init()
 void menu_wow_deinit()
 {
   set_laser(0);
+  set_laser_pos(PWM_PERIOD/2,PWM_PERIOD/2);
 }
 
 void menu_wow_run()
