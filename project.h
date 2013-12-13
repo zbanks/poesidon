@@ -1,13 +1,15 @@
+#ifndef __PROJECT_H
+#define __PROJECT_H
+
 #include <stdint.h>
 
 typedef enum {
-    CIRCLE,
     DOT,
     LINE,
     SQUARE,
     LAST_SHAPE = LINE
 } shape_t;
 
-int32_t get_mirror_angle(int32_t y,int32_t x);
-int32_t ramp(int32_t max,int32_t half_period,int32_t time);
-int32_t square(int32_t amp,int32_t half_period,int32_t time);
+void project(shape_t shape,int depth,int length,int speed,int t);
+
+#endif

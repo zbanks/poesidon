@@ -1,5 +1,6 @@
 #include "project.h"
 #include "stdlib.h" // abs
+#include "hal.h"
 
 // Nominally 10000
 #define ANGLE_GAIN 11000
@@ -7,13 +8,16 @@
 // Nominally 0
 #define ANGLE_ZERO -1000
 
-// Woo magic numbers
+int32_t get_mirror_angle(int32_t y,int32_t x);
+int32_t ramp(int32_t max,int32_t half_period,int32_t time);
+int32_t square(int32_t amp,int32_t half_period,int32_t time);
 
 int32_t fast_arctan(int32_t y,int32_t x);
 
+// Woo magic numbers
 int32_t fast_arctan(int32_t y,int32_t x) // returns 10000 * arctan(y/x) for large y/x
 {
-    return 15708-(7854*x/y - x*((x-y))*(2447 + 0663*x/y)/(y*y));
+    return 15708-(7854*x/y - x*((x-y))*(2447 + 663*x/y)/(y*y));
 }
 
 int32_t get_mirror_angle(int32_t y,int32_t x)
@@ -52,19 +56,19 @@ int32_t square(int32_t amp,int32_t half_period,int32_t time)
 
 void project(shape_t shape,int depth,int length,int speed,int t)
 {
-  int ya=get_mirror_angle(ramp(length,speed,t),depth);
+  int ya=get_mirror_angle(ramp(length*10,speed*1000,t),depth*10);
   int xa=5000;
 
   switch(shape)
   {
-  case CIRCLE:
-    xa+=square(300,20,t+10);
-    ya+=square(300,20,t);    
+  case SQUARE:
+    xa+=square(200,40,t+20);
+    ya+=square(100,40,t);    
     break;
   case DOT:
     break;
   case LINE:
-    xa+=square(1000,50,t);
+    xa+=square(1000,40,t);
     break;
   }
   set_laser_pos(xa,ya);
