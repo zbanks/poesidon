@@ -8,10 +8,19 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 
 #define RAINBOW_PERIOD 100
 
+
+//FIXME:
+#define LASER_BG_IMAGE SPLASH_IMAGE
+#define LASER_BG_DATA SPLASH_DATA
+
+
 // The main settings menu
 void menu_main_init();
 void menu_main_run();
-void menu_main_redraw(uint8_t s);
+
+// The laser settings menu
+void menu_laser_init();
+void menu_laser_run();
 
 // The splash screen
 void menu_splash_init();
@@ -25,19 +34,28 @@ typedef struct {
 } state_t;
 
 const state_t menu_main = {&menu_main_init,&menu_main_run};
+const state_t menu_laser = {&menu_laser_init,&menu_laser_run};
 const state_t menu_splash = {&menu_splash_init,&menu_splash_run};
 
 state_t const* state;
 
 btn_t buttons,buttons_edge;
 
-enum laser_shape setting_laser_shape;
-
 typedef struct {
   uint8_t x,y,dx,dy;
   uint8_t* img;
   uint8_t color;
 } sprite_t;
+
+enum sprite_names {
+    TXT_BRIGHT_LASER_SPRITE,
+    TXT_MUCH_LENGTH_SPRITE,
+    TXT_SUCH_SPEED_SPRITE,
+    TXT_WOW_IMAGE_SPRITE,
+    CIRCLE_SPRITE,
+    CIRCLE_DOT,
+    CIRCLE_LINE
+};
 
 const sprite_t sprites[] = {
   {100, 20, TXT_BRIGHT_LASER_IMAGE, COLOR_RED},
@@ -95,12 +113,12 @@ void menu_main_init()
   }
 }
 
-inline void draw_sprite(uint8_t s, uint8_t* bg)
+inline void draw_sprite(enum sprite_names s, uint8_t* bg)
 {
   lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,bg,sprites[s].color);
 }
 
-inline void draw_sprite(uint8_t s, uint8_t* bg, uint8_t color)
+inline void draw_sprite(enum sprite_names s, uint8_t* bg, uint8_t color)
 {
   lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,bg,color);
 }
@@ -130,6 +148,9 @@ void menu_main_run()
 
     if(buttons_edge & BUTTON_A){
         //TODO
+        if(selection == 0){
+              state=&menu_laser;
+        }
         return;
     }
 
@@ -141,22 +162,30 @@ void menu_main_run()
 }
 
 void menu_laser_init(){
-    lcd_blit_mem(0, 0, SPLASH_IMAGE); //FIXME
+    lcd_blit_mem(0, 0, LASER_BG_DATA);
+    draw_sprite(DOT_SPRITE, LASER_BG_DATA);
+    draw_sprite(CIRCLE_SPRITE, LASER_BG_DATA);
+    draw_sprite(LINE_SPRITE, LASER_BG_DATA);
 }
 
 void menu_laser_run(){
-    int rainbow_ctr = (time/RAINBOW_PERIOD) % sizeof(RAINBOW);
+    uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
+
+    draw_sprite(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA, rainbow_color);
 
     if(buttons & (BUTTON_DOWN | BUTTON_RIGHT)){
         if(setting_laser_shape < LAST_SHAPE){
+            draw_sprite(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA);
             setting_laser_shape++;
         }
     }
     if(buttons & (BUTTON_UP | BUTTON_LEFT)){
         if(setting_laser_shape > 0){
+            draw_sprite(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA);
             setting_laser_shape--;
         }
     }
+
     if(buttons & (BUTTON_A | BUTTON_B)){
         state = &menu_main;
         return;
