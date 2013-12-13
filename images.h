@@ -42,6 +42,66 @@ extern const uint8_t SPLASH_DATA[16900];
 #define SPLASH_TXT_HEIGHT (101)
 extern const uint8_t SPLASH_TXT_DATA[6565];
 
+// File: 'images/txt_0.png'
+#define TXT_0_IMAGE TXT_0_WIDTH,TXT_0_HEIGHT,(uint8_t*)TXT_0_DATA
+#define TXT_0_WIDTH (56)
+#define TXT_0_HEIGHT (24)
+extern const uint8_t TXT_0_DATA[1344];
+
+// File: 'images/txt_1.png'
+#define TXT_1_IMAGE TXT_1_WIDTH,TXT_1_HEIGHT,(uint8_t*)TXT_1_DATA
+#define TXT_1_WIDTH (56)
+#define TXT_1_HEIGHT (24)
+extern const uint8_t TXT_1_DATA[1344];
+
+// File: 'images/txt_2.png'
+#define TXT_2_IMAGE TXT_2_WIDTH,TXT_2_HEIGHT,(uint8_t*)TXT_2_DATA
+#define TXT_2_WIDTH (56)
+#define TXT_2_HEIGHT (24)
+extern const uint8_t TXT_2_DATA[1344];
+
+// File: 'images/txt_3.png'
+#define TXT_3_IMAGE TXT_3_WIDTH,TXT_3_HEIGHT,(uint8_t*)TXT_3_DATA
+#define TXT_3_WIDTH (56)
+#define TXT_3_HEIGHT (24)
+extern const uint8_t TXT_3_DATA[1344];
+
+// File: 'images/txt_4.png'
+#define TXT_4_IMAGE TXT_4_WIDTH,TXT_4_HEIGHT,(uint8_t*)TXT_4_DATA
+#define TXT_4_WIDTH (56)
+#define TXT_4_HEIGHT (24)
+extern const uint8_t TXT_4_DATA[1344];
+
+// File: 'images/txt_5.png'
+#define TXT_5_IMAGE TXT_5_WIDTH,TXT_5_HEIGHT,(uint8_t*)TXT_5_DATA
+#define TXT_5_WIDTH (56)
+#define TXT_5_HEIGHT (24)
+extern const uint8_t TXT_5_DATA[1344];
+
+// File: 'images/txt_6.png'
+#define TXT_6_IMAGE TXT_6_WIDTH,TXT_6_HEIGHT,(uint8_t*)TXT_6_DATA
+#define TXT_6_WIDTH (56)
+#define TXT_6_HEIGHT (24)
+extern const uint8_t TXT_6_DATA[1344];
+
+// File: 'images/txt_7.png'
+#define TXT_7_IMAGE TXT_7_WIDTH,TXT_7_HEIGHT,(uint8_t*)TXT_7_DATA
+#define TXT_7_WIDTH (56)
+#define TXT_7_HEIGHT (24)
+extern const uint8_t TXT_7_DATA[1344];
+
+// File: 'images/txt_8.png'
+#define TXT_8_IMAGE TXT_8_WIDTH,TXT_8_HEIGHT,(uint8_t*)TXT_8_DATA
+#define TXT_8_WIDTH (56)
+#define TXT_8_HEIGHT (24)
+extern const uint8_t TXT_8_DATA[1344];
+
+// File: 'images/txt_9.png'
+#define TXT_9_IMAGE TXT_9_WIDTH,TXT_9_HEIGHT,(uint8_t*)TXT_9_DATA
+#define TXT_9_WIDTH (56)
+#define TXT_9_HEIGHT (24)
+extern const uint8_t TXT_9_DATA[1344];
+
 // File: 'images/txt_bright_laser.png'
 #define TXT_BRIGHT_LASER_IMAGE TXT_BRIGHT_LASER_WIDTH,TXT_BRIGHT_LASER_HEIGHT,(uint8_t*)TXT_BRIGHT_LASER_DATA
 #define TXT_BRIGHT_LASER_WIDTH (18)

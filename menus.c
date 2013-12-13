@@ -182,20 +182,20 @@ void menu_laser_run(){
 
     draw_sprite_color(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA, rainbow_color);
 
-    if(buttons & (BUTTON_DOWN | BUTTON_RIGHT)){
+    if(buttons_edge & (BUTTON_DOWN | BUTTON_RIGHT)){
         if(setting_laser_shape < LAST_SHAPE){
             draw_sprite(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA);
             setting_laser_shape++;
         }
     }
-    if(buttons & (BUTTON_UP | BUTTON_LEFT)){
+    if(buttons_edge & (BUTTON_UP | BUTTON_LEFT)){
         if(setting_laser_shape > 0){
             draw_sprite(CIRCLE_SPRITE + setting_laser_shape, LASER_BG_DATA);
             setting_laser_shape--;
         }
     }
 
-    if(buttons & (BUTTON_A | BUTTON_B)){
+    if(buttons_edge & (BUTTON_A | BUTTON_B)){
         state = &menu_main;
         return;
     }
