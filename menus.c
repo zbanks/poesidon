@@ -76,6 +76,7 @@ enum sprite_names {
     TXT_SUCH_SPEED_SPRITE,
     TXT_WOW_IMAGE_SPRITE,
     CIRCLE_SPRITE,
+    SQUARE_SPRITE,
     LINE_SPRITE,
     DOT_SPRITE,
     TXT_SO_SHALLOW_SPRITE,
@@ -89,11 +90,12 @@ const sprite_t sprites[] = {
   {25, 20, TXT_SUCH_SPEED_IMAGE, COLOR_BLUE},
   {10, 90, TXT_WOW_IMAGE, COLOR_ORANGE},
   {80, 20, CIRCLE_IMAGE, COLOR_GREEN},
-  {50, 70, DOT_IMAGE, COLOR_GREEN},
+  {62, 36, SQUARE_IMAGE, COLOR_GREEN},
+  {90, 70, DOT_IMAGE, COLOR_GREEN},
   {10, 25, LINE_IMAGE, COLOR_GREEN},
-  {120, 10, TXT_SO_SHALLOW_IMAGE, COLOR_ORANGE},
-  {95, 20, TXT_MUCH_DEEP_IMAGE, COLOR_ORANGE},
-  {70, 17, TXT_HOW_MANY_FEAT_LONG_IMAGE, COLOR_ORANGE},
+  {104, 10, TXT_SO_SHALLOW_IMAGE, COLOR_ORANGE},
+  {88, 20, TXT_MUCH_DEEP_IMAGE, COLOR_ORANGE},
+  {63, 17, TXT_HOW_MANY_FEAT_LONG_IMAGE, COLOR_ORANGE},
 };
 
 inline void draw_sprite(enum sprite_names s, const uint8_t* bg);
@@ -219,6 +221,7 @@ void menu_laser_init(){
     lcd_blit_mem(0, 0, LASER_BG_IMAGE);
     draw_sprite(DOT_SPRITE, LASER_BG_DATA);
     draw_sprite(CIRCLE_SPRITE, LASER_BG_DATA);
+    draw_sprite(SQUARE_SPRITE, LASER_BG_DATA);
     draw_sprite(LINE_SPRITE, LASER_BG_DATA);
 }
 
@@ -292,12 +295,12 @@ void menu_length_run(){
     }else if(length_state == 2){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length % 100 >= 10){
+            if(setting_length >= 10){
                 setting_length -= 10;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_length % 100 < 90){
+            if(setting_length < 90){
                 setting_length += 10;
             }
         }
@@ -305,12 +308,12 @@ void menu_length_run(){
     }else if(length_state == 3){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length % 10 >= 1){
+            if(setting_length >= 1){
                 setting_length -= 1;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_length % 10 < 900){
+            if(setting_length < 900){
                 setting_length += 1;
             }
         }
