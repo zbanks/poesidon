@@ -18,7 +18,7 @@ typedef enum {
 #define COLOR_BLACK 0x00
 
 // The main function to render the current menu 
-void render_menu(void);
+void render_menu();
 
 // The main settings menu
 menu_state_t menu_main(btn_t);

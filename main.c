@@ -2,12 +2,23 @@
 #include "hal.h"
 #include "project.h"
 #include "images.h"
+#include "menus.h"
 
 uint32_t time=0;
 
 int main(void)
 {
   hardware_init();
+  busy_wait(1000000);
+  init_lcd();
+  
+  for(;;)
+  {
+      render_menu();
+      busy_wait(100000);
+  }
+}
+
 
   /*
   set_laser(0);
@@ -37,7 +48,6 @@ int main(void)
     busy_wait(100000);
   }
   */
-}
 
 /*
     int xa=5000+square(1000,30,time-start_t+15);

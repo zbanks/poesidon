@@ -392,18 +392,18 @@ uint8_t read_buttons_debounced()
   for(i=0;i<6;i++)
   {
     state = 1 & (switches >> i);
-    if(state && debounce[i]>0)
+    if(!state && debounce[i]>0)
     {
       debounce[i]--;
-      if(debounce[i] < 10)
+      if(debounce[i] < 1)
       {
         debounced &= ~(1<<i);
       }
     }
-    else if(!state && debounce[i]<30)
+    else if(state && debounce[i]<3)
     {
       debounce[i]++;
-      if(debounce[i] > 20)
+      if(debounce[i] > 2)
       {
         debounced |= 1<<i;
       }
