@@ -49,3 +49,7 @@ int32_t square(int32_t amp,int32_t half_period,int32_t time)
   }
   return amp;
 }
+
+void project(shape_t shape,int depth,int length,int speed,int t)
+{
+}

@@ -970,6 +970,9 @@
       <name>$PROJ_DIR$\..\menus.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\numbers.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\project.c</name>
     </file>
     <file>

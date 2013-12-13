@@ -8,13 +8,11 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 
 #define RAINBOW_PERIOD 100
 
-
 //FIXME:
 #define LASER_BG_IMAGE SPLASH_IMAGE
 #define LASER_BG_DATA SPLASH_DATA
 #define WOW_BG_IMAGE SPLASH_IMAGE
 #define WOW_BG_DATA SPLASH_DATA
-
 
 // The main settings menu
 void menu_main_init();
@@ -96,10 +94,12 @@ const sprite_t sprites[] = {
 
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
-enum laser_shape setting_laser_shape;
+shape_t setting_laser_shape;
 int setting_depth;
 int setting_length;
 int setting_speed;
+
+int wow_start_time;
 
 // Begin Functions
 
@@ -257,10 +257,28 @@ void menu_splash_run()
 void menu_wow_init()
 {
   lcd_blit_mem(0, 0, WOW_BG_IMAGE);
+  wow_start_time=time;
+  set_laser(1);
+}
+
+void menu_wow_deinit()
+{
+  set_laser(0);
 }
 
 void menu_wow_run()
 {
+  static int wow_last_time=-1;
+  int wow_time;
+  
+  wow_time=(time-wow_start_time)/1000;
+  if(wow_time != wow_last_time)
+  {
+    blit_number(10,10,wow_time,WOW_BG_DATA,0);
+  }
+
+  project(setting_laser_shape,setting_depth,setting_length,setting_speed,time-wow_start_time);
+  
   if(buttons & BUTTON_B)
   {
     state=&menu_main;

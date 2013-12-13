@@ -1,6 +1,5 @@
 #include "stm32f10x.h"
 #include "hal.h"
-#include "project.h"
 #include "images.h"
 #include "menus.h"
 

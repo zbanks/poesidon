@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "project.h"
 
 typedef uint8_t btn_t;
 
@@ -12,15 +13,7 @@ typedef uint8_t btn_t;
 #define COLOR_WHITE 0xFF
 #define COLOR_BLACK 0x00
 
-// Global settings
-enum laser_shape {
-    CIRCLE,
-    DOT,
-    LINE,
-    LAST_SHAPE = LINE
-};
-
-extern enum laser_shape setting_laser_shape;
+extern shape_t setting_laser_shape;
 extern int setting_depth;
 extern int setting_length;
 extern int setting_speed;

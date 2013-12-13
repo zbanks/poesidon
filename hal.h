@@ -1,5 +1,3 @@
-#include "stm32f10x.h"
-
 #define dxLCDScreen 130
 #define dyLCDScreen 130
 
@@ -30,4 +28,4 @@ void lcd_blit_fun(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint8_t (*fun)(uint8
 void lcd_blit_sprite(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint8_t* img,uint8_t* bg,uint8_t color);
 uint8_t read_buttons();
 uint8_t read_buttons_debounced();
-void busy_wait(__IO uint32_t nCount);
+void busy_wait(uint32_t nCount);

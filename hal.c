@@ -177,9 +177,10 @@ void reset_screen()
   busy_wait(100000);
 }
 
-void busy_wait(__IO uint32_t nCount)
+void busy_wait(uint32_t nCount)
 {
-  for(; nCount != 0; nCount--);
+  __IO uint32_t n=nCount;
+  for(; n != 0; n--);
 }
 
 void send_screen_byte(uint16_t datum)
