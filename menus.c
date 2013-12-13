@@ -17,6 +17,7 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 // The main settings menu
 void menu_main_init();
 void menu_main_run();
+void menu_main_redraw(uint8_t);
 
 // The laser settings menu
 void menu_laser_init();
@@ -87,6 +88,9 @@ const sprite_t sprites[] = {
   {10, 25, LINE_IMAGE, COLOR_GREEN},
 };
 
+inline void draw_sprite(enum sprite_names s, const uint8_t* bg);
+inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t color);
+
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
 enum laser_shape setting_laser_shape;
@@ -133,8 +137,6 @@ void render_menu()
   }
 }
 
-void menu_main_redraw(uint8_t i);
-inline void draw_sprite(enum sprite_names s, const uint8_t* bg);
 
 void menu_main_init()
 {
@@ -184,15 +186,24 @@ void menu_main_run()
     }
 
     if(buttons_edge & BUTTON_A){
-        //TODO
-        if(selection == 0){
-              state=&menu_laser;
+        switch(selection){
+            case 0:
+                state=&menu_laser;
+            break;
+            case 1:
+                state = &menu_length;
+            break;
+            case 2:
+                state = &menu_speed;
+            break;
+            case 3:
+                state = &menu_run;
+            break;
         }
         return;
     }
 
     // Draw selection in rainbow
-    //lcd_blit_sprite(sprites[selection].x,sprites[selection].y,sprites[selection].dx,sprites[selection].dy,sprites[selection].img,(uint8_t*) DOGE_WATER_DATA,RAINBOW[rainbow_ctr]);
     draw_sprite_color(selection, DOGE_WATER_DATA, RAINBOW[rainbow_ctr]);
 
     return;
@@ -229,6 +240,24 @@ void menu_laser_run(){
     }
 }
 
+void menu_length_init(){
+
+}
+
+void menu_length_run(){
+    //TODO
+    state = &menu_main;
+}
+
+void menu_speed_init(){
+
+}
+
+void menu_speed_run(){
+    //TODO
+    state = &menu_main;
+}
+
 void menu_splash_init()
 {
   splash_timeout=2000;
@@ -244,4 +273,13 @@ void menu_splash_run()
   {
       state=&menu_main;
   }
+}
+
+void menu_konami_init(){
+
+}
+
+void menu_konami_run(){
+    //TODO
+    state = &menu_main;
 }
