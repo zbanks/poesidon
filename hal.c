@@ -357,15 +357,24 @@ void lcd_blit_sprite(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint8_t* img,uint
   {
     for(i=0;i<dx;i++)
     {
-      fgc=*img;
+      fgc=(*img & 0xE0)>>5;
       img++;
-      if(fgc==0xFF)
+      
+      if(fgc==7)
       {
         out=bg[dxLCDScreen*(j+y)+(i+x)];
       }
-      else
+      else if(fgc==0)
       {
         out=color;
+      }
+      else
+      {
+        uint8_t bgc=bg[dxLCDScreen*(j+y)+(i+x)];
+        
+        out=(((((bgc & 0xE0)>>5)*fgc+((color & 0xE0)>>5)*(7-fgc))/7)<<5)+
+        (((((bgc & 0x1C)>>2)*fgc+((color & 0x1C)>>2)*(7-fgc))/7)<<2)+
+        (((((bgc & 0x03))*fgc+((color & 0x03))*(7-fgc))/7));
       }
 
       asm("rbit %0, %1\n" : "=r"(reversed) : "r"(LCD_PACK(lctData,out)));
