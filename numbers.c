@@ -22,6 +22,10 @@ const number_t digit_img[10]={
   {TXT_9_IMAGE},
 };
 
+void blit_digit(uint8_t x,uint8_t y,int num,uint8_t* bg,uint8_t color){
+
+}
+
 void blit_number(uint8_t x,uint8_t y,int num,uint8_t* bg,uint8_t color)
 {
   uint8_t digits[10];
