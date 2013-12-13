@@ -48,6 +48,12 @@ extern const uint8_t SPLASH_TXT_DATA[6565];
 #define SQUARE_HEIGHT (40)
 extern const uint8_t SQUARE_DATA[1600];
 
+// File: 'images/swimming.png'
+#define SWIMMING_IMAGE SWIMMING_WIDTH,SWIMMING_HEIGHT,(uint8_t*)SWIMMING_DATA
+#define SWIMMING_WIDTH (130)
+#define SWIMMING_HEIGHT (130)
+extern const uint8_t SWIMMING_DATA[16900];
+
 // File: 'images/tpayne.png'
 #define TPAYNE_IMAGE TPAYNE_WIDTH,TPAYNE_HEIGHT,(uint8_t*)TPAYNE_DATA
 #define TPAYNE_WIDTH (130)
