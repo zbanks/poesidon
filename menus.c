@@ -10,9 +10,6 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 
 #define SPLASH_TXT_IMAGE TXT_WOW_IMAGE
 
-#define DOGE_WATER_DATA SPLASH_DATA
-#define DOGE_WATER_IMAGE SPLASH_IMAGE
-
 #define RAINBOW_PERIOD 100
 
 // The main settings menu

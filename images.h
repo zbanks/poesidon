@@ -1,5 +1,11 @@
 #include <stdint.h>
 
+// File: 'images/Poseidon_doge_1.png'
+#define POSEIDON_DOGE_1_IMAGE POSEIDON_DOGE_1_WIDTH,POSEIDON_DOGE_1_HEIGHT,(uint8_t*)POSEIDON_DOGE_1_DATA
+#define POSEIDON_DOGE_1_WIDTH (130)
+#define POSEIDON_DOGE_1_HEIGHT (130)
+extern const uint8_t POSEIDON_DOGE_1_DATA[16900];
+
 // File: 'images/circle.png'
 #define CIRCLE_IMAGE CIRCLE_WIDTH,CIRCLE_HEIGHT,(uint8_t*)CIRCLE_DATA
 #define CIRCLE_WIDTH (40)
