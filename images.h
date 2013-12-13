@@ -1,11 +1,5 @@
 #include <stdint.h>
 
-// File: 'images/Poseidon_doge_1.png'
-#define POSEIDON_DOGE_1_IMAGE POSEIDON_DOGE_1_WIDTH,POSEIDON_DOGE_1_HEIGHT,(uint8_t*)POSEIDON_DOGE_1_DATA
-#define POSEIDON_DOGE_1_WIDTH (130)
-#define POSEIDON_DOGE_1_HEIGHT (130)
-extern const uint8_t POSEIDON_DOGE_1_DATA[16900];
-
 // File: 'images/circle.png'
 #define CIRCLE_IMAGE CIRCLE_WIDTH,CIRCLE_HEIGHT,(uint8_t*)CIRCLE_DATA
 #define CIRCLE_WIDTH (40)
@@ -30,6 +24,12 @@ extern const uint8_t DOT_DATA[1600];
 #define LINE_HEIGHT (80)
 extern const uint8_t LINE_DATA[3200];
 
+// File: 'images/poesidon_doge_1.png'
+#define POESIDON_DOGE_1_IMAGE POESIDON_DOGE_1_WIDTH,POESIDON_DOGE_1_HEIGHT,(uint8_t*)POESIDON_DOGE_1_DATA
+#define POESIDON_DOGE_1_WIDTH (130)
+#define POESIDON_DOGE_1_HEIGHT (130)
+extern const uint8_t POESIDON_DOGE_1_DATA[16900];
+
 // File: 'images/splash.png'
 #define SPLASH_IMAGE SPLASH_WIDTH,SPLASH_HEIGHT,(uint8_t*)SPLASH_DATA
 #define SPLASH_WIDTH (130)
@@ -41,6 +41,12 @@ extern const uint8_t SPLASH_DATA[16900];
 #define SPLASH_TXT_WIDTH (65)
 #define SPLASH_TXT_HEIGHT (101)
 extern const uint8_t SPLASH_TXT_DATA[6565];
+
+// File: 'images/tpayne.png'
+#define TPAYNE_IMAGE TPAYNE_WIDTH,TPAYNE_HEIGHT,(uint8_t*)TPAYNE_DATA
+#define TPAYNE_WIDTH (130)
+#define TPAYNE_HEIGHT (130)
+extern const uint8_t TPAYNE_DATA[16900];
 
 // File: 'images/txt_0.png'
 #define TXT_0_IMAGE TXT_0_WIDTH,TXT_0_HEIGHT,(uint8_t*)TXT_0_DATA
@@ -108,11 +114,29 @@ extern const uint8_t TXT_9_DATA[1344];
 #define TXT_BRIGHT_LASER_HEIGHT (75)
 extern const uint8_t TXT_BRIGHT_LASER_DATA[1350];
 
+// File: 'images/txt_how_many_feat_long.png'
+#define TXT_HOW_MANY_FEAT_LONG_IMAGE TXT_HOW_MANY_FEAT_LONG_WIDTH,TXT_HOW_MANY_FEAT_LONG_HEIGHT,(uint8_t*)TXT_HOW_MANY_FEAT_LONG_DATA
+#define TXT_HOW_MANY_FEAT_LONG_WIDTH (17)
+#define TXT_HOW_MANY_FEAT_LONG_HEIGHT (119)
+extern const uint8_t TXT_HOW_MANY_FEAT_LONG_DATA[2023];
+
+// File: 'images/txt_much_deep.png'
+#define TXT_MUCH_DEEP_IMAGE TXT_MUCH_DEEP_WIDTH,TXT_MUCH_DEEP_HEIGHT,(uint8_t*)TXT_MUCH_DEEP_DATA
+#define TXT_MUCH_DEEP_WIDTH (25)
+#define TXT_MUCH_DEEP_HEIGHT (91)
+extern const uint8_t TXT_MUCH_DEEP_DATA[2275];
+
 // File: 'images/txt_much_length.png'
 #define TXT_MUCH_LENGTH_IMAGE TXT_MUCH_LENGTH_WIDTH,TXT_MUCH_LENGTH_HEIGHT,(uint8_t*)TXT_MUCH_LENGTH_DATA
 #define TXT_MUCH_LENGTH_WIDTH (18)
 #define TXT_MUCH_LENGTH_HEIGHT (77)
 extern const uint8_t TXT_MUCH_LENGTH_DATA[1386];
+
+// File: 'images/txt_so_shallow.png'
+#define TXT_SO_SHALLOW_IMAGE TXT_SO_SHALLOW_WIDTH,TXT_SO_SHALLOW_HEIGHT,(uint8_t*)TXT_SO_SHALLOW_DATA
+#define TXT_SO_SHALLOW_WIDTH (25)
+#define TXT_SO_SHALLOW_HEIGHT (87)
+extern const uint8_t TXT_SO_SHALLOW_DATA[2175];
 
 // File: 'images/txt_such_speed.png'
 #define TXT_SUCH_SPEED_IMAGE TXT_SUCH_SPEED_WIDTH,TXT_SUCH_SPEED_HEIGHT,(uint8_t*)TXT_SUCH_SPEED_DATA

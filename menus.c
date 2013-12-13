@@ -77,7 +77,10 @@ enum sprite_names {
     TXT_WOW_IMAGE_SPRITE,
     CIRCLE_SPRITE,
     LINE_SPRITE,
-    DOT_SPRITE
+    DOT_SPRITE,
+    TXT_SO_SHALLOW_SPRITE,
+    TXT_MUCH_DEEP_SPRITE,
+    TXT_HOW_MANY_FEAT_LONG_SPRITE
 };
 
 const sprite_t sprites[] = {
@@ -88,6 +91,9 @@ const sprite_t sprites[] = {
   {80, 20, CIRCLE_IMAGE, COLOR_GREEN},
   {50, 70, DOT_IMAGE, COLOR_GREEN},
   {10, 25, LINE_IMAGE, COLOR_GREEN},
+  {120, 10, TXT_SO_SHALLOW_IMAGE, COLOR_ORANGE},
+  {95, 20, TXT_MUCH_DEEP_IMAGE, COLOR_ORANGE},
+  {70, 17, TXT_HOW_MANY_FEAT_LONG_IMAGE, COLOR_ORANGE},
 };
 
 inline void draw_sprite(enum sprite_names s, const uint8_t* bg);
