@@ -53,8 +53,8 @@ enum sprite_names {
     TXT_SUCH_SPEED_SPRITE,
     TXT_WOW_IMAGE_SPRITE,
     CIRCLE_SPRITE,
-    CIRCLE_DOT,
-    CIRCLE_LINE
+    LINE_SPRITE,
+    DOT_SPRITE
 };
 
 const sprite_t sprites[] = {
@@ -113,14 +113,18 @@ void menu_main_init()
   }
 }
 
-inline void draw_sprite(enum sprite_names s, uint8_t* bg)
-{
-  lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,bg,sprites[s].color);
+void menu_main_redraw(uint8_t i){
+    draw_sprite(i, DOGE_WATER_IMAGE);
 }
 
-inline void draw_sprite(enum sprite_names s, uint8_t* bg, uint8_t color)
+inline void draw_sprite(enum sprite_names s, const uint8_t* bg)
 {
-  lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,bg,color);
+  lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img,(uint8_t *)bg,sprites[s].color);
+}
+
+inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t color)
+{
+  lcd_blit_sprite(sprites[s].x,sprites[s].y,sprites[s].dx,sprites[s].dy,sprites[s].img, (uint8_t *)bg,color);
 }
 
 void menu_main_run()
