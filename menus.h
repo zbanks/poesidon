@@ -20,8 +20,9 @@ enum laser_shape {
     LAST_SHAPE = DOT
 };
 
-enum laser_shape setting_laser_shape;
+extern enum laser_shape setting_laser_shape;
 
 // The main function to render the current menu 
+void init_menu();
 void render_menu();
 

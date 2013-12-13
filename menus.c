@@ -38,6 +38,8 @@ state_t const* state;
 
 btn_t buttons,buttons_edge;
 
+enum laser_shape setting_laser_shape;
+
 typedef struct {
   uint8_t x,y,dx,dy;
   uint8_t* img;
