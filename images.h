@@ -162,3 +162,165 @@ extern const uint8_t TXT_SUCH_SPEED_DATA[621];
 #define TXT_WOW_HEIGHT (25)
 extern const uint8_t TXT_WOW_DATA[225];
 
+// SD Object Bitmap File: 'konami/title.opng'
+#define TITLE_IMAGE TITLE_WIDTH,TITLE_HEIGHT,(uint8_t*)TITLE_OFFSET
+#define TITLE_WIDTH (130)
+#define TITLE_HEIGHT (130)
+#define TITLE_OFFSET (0x0)
+
+// SD Object Bitmap File: 'konami/out/ac.opng'
+#define AC_IMAGE AC_WIDTH,AC_HEIGHT,(uint8_t*)AC_OFFSET
+#define AC_WIDTH (130)
+#define AC_HEIGHT (130)
+#define AC_OFFSET (0x4400)
+
+// SD Object Bitmap File: 'konami/out/acrefoot.opng'
+#define ACREFOOT_IMAGE ACREFOOT_WIDTH,ACREFOOT_HEIGHT,(uint8_t*)ACREFOOT_OFFSET
+#define ACREFOOT_WIDTH (130)
+#define ACREFOOT_HEIGHT (130)
+#define ACREFOOT_OFFSET (0x8800)
+
+// SD Object Bitmap File: 'konami/out/adam.opng'
+#define ADAM_IMAGE ADAM_WIDTH,ADAM_HEIGHT,(uint8_t*)ADAM_OFFSET
+#define ADAM_WIDTH (130)
+#define ADAM_HEIGHT (130)
+#define ADAM_OFFSET (0xcc00)
+
+// SD Object Bitmap File: 'konami/out/austin.opng'
+#define AUSTIN_IMAGE AUSTIN_WIDTH,AUSTIN_HEIGHT,(uint8_t*)AUSTIN_OFFSET
+#define AUSTIN_WIDTH (130)
+#define AUSTIN_HEIGHT (130)
+#define AUSTIN_OFFSET (0x11000)
+
+// SD Object Bitmap File: 'konami/out/banks.opng'
+#define BANKS_IMAGE BANKS_WIDTH,BANKS_HEIGHT,(uint8_t*)BANKS_OFFSET
+#define BANKS_WIDTH (130)
+#define BANKS_HEIGHT (130)
+#define BANKS_OFFSET (0x15400)
+
+// SD Object Bitmap File: 'konami/out/brian.opng'
+#define BRIAN_IMAGE BRIAN_WIDTH,BRIAN_HEIGHT,(uint8_t*)BRIAN_OFFSET
+#define BRIAN_WIDTH (130)
+#define BRIAN_HEIGHT (130)
+#define BRIAN_OFFSET (0x19800)
+
+// SD Object Bitmap File: 'konami/out/dan.opng'
+#define DAN_IMAGE DAN_WIDTH,DAN_HEIGHT,(uint8_t*)DAN_OFFSET
+#define DAN_WIDTH (130)
+#define DAN_HEIGHT (130)
+#define DAN_OFFSET (0x1dc00)
+
+// SD Object Bitmap File: 'konami/out/duncan.opng'
+#define DUNCAN_IMAGE DUNCAN_WIDTH,DUNCAN_HEIGHT,(uint8_t*)DUNCAN_OFFSET
+#define DUNCAN_WIDTH (130)
+#define DUNCAN_HEIGHT (130)
+#define DUNCAN_OFFSET (0x22000)
+
+// SD Object Bitmap File: 'konami/out/emele.opng'
+#define EMELE_IMAGE EMELE_WIDTH,EMELE_HEIGHT,(uint8_t*)EMELE_OFFSET
+#define EMELE_WIDTH (130)
+#define EMELE_HEIGHT (130)
+#define EMELE_OFFSET (0x26400)
+
+// SD Object Bitmap File: 'konami/out/eric.opng'
+#define ERIC_IMAGE ERIC_WIDTH,ERIC_HEIGHT,(uint8_t*)ERIC_OFFSET
+#define ERIC_WIDTH (130)
+#define ERIC_HEIGHT (130)
+#define ERIC_OFFSET (0x2a800)
+
+// SD Object Bitmap File: 'konami/out/herbert.opng'
+#define HERBERT_IMAGE HERBERT_WIDTH,HERBERT_HEIGHT,(uint8_t*)HERBERT_OFFSET
+#define HERBERT_WIDTH (130)
+#define HERBERT_HEIGHT (130)
+#define HERBERT_OFFSET (0x2ec00)
+
+// SD Object Bitmap File: 'konami/out/ivan.opng'
+#define IVAN_IMAGE IVAN_WIDTH,IVAN_HEIGHT,(uint8_t*)IVAN_OFFSET
+#define IVAN_WIDTH (130)
+#define IVAN_HEIGHT (130)
+#define IVAN_OFFSET (0x33000)
+
+// SD Object Bitmap File: 'konami/out/jake.opng'
+#define JAKE_IMAGE JAKE_WIDTH,JAKE_HEIGHT,(uint8_t*)JAKE_OFFSET
+#define JAKE_WIDTH (130)
+#define JAKE_HEIGHT (130)
+#define JAKE_OFFSET (0x37400)
+
+// SD Object Bitmap File: 'konami/out/jonny.opng'
+#define JONNY_IMAGE JONNY_WIDTH,JONNY_HEIGHT,(uint8_t*)JONNY_OFFSET
+#define JONNY_WIDTH (130)
+#define JONNY_HEIGHT (130)
+#define JONNY_OFFSET (0x3b800)
+
+// SD Object Bitmap File: 'konami/out/kamal.opng'
+#define KAMAL_IMAGE KAMAL_WIDTH,KAMAL_HEIGHT,(uint8_t*)KAMAL_OFFSET
+#define KAMAL_WIDTH (130)
+#define KAMAL_HEIGHT (130)
+#define KAMAL_OFFSET (0x3fc00)
+
+// SD Object Bitmap File: 'konami/out/marvin.opng'
+#define MARVIN_IMAGE MARVIN_WIDTH,MARVIN_HEIGHT,(uint8_t*)MARVIN_OFFSET
+#define MARVIN_WIDTH (130)
+#define MARVIN_HEIGHT (130)
+#define MARVIN_OFFSET (0x44000)
+
+// SD Object Bitmap File: 'konami/out/max.opng'
+#define MAX_IMAGE MAX_WIDTH,MAX_HEIGHT,(uint8_t*)MAX_OFFSET
+#define MAX_WIDTH (130)
+#define MAX_HEIGHT (130)
+#define MAX_OFFSET (0x48400)
+
+// SD Object Bitmap File: 'konami/out/peter.opng'
+#define PETER_IMAGE PETER_WIDTH,PETER_HEIGHT,(uint8_t*)PETER_OFFSET
+#define PETER_WIDTH (130)
+#define PETER_HEIGHT (130)
+#define PETER_OFFSET (0x4c800)
+
+// SD Object Bitmap File: 'konami/out/sadun.opng'
+#define SADUN_IMAGE SADUN_WIDTH,SADUN_HEIGHT,(uint8_t*)SADUN_OFFSET
+#define SADUN_WIDTH (130)
+#define SADUN_HEIGHT (130)
+#define SADUN_OFFSET (0x50c00)
+
+// SD Object Bitmap File: 'konami/out/sherin.opng'
+#define SHERIN_IMAGE SHERIN_WIDTH,SHERIN_HEIGHT,(uint8_t*)SHERIN_OFFSET
+#define SHERIN_WIDTH (130)
+#define SHERIN_HEIGHT (130)
+#define SHERIN_OFFSET (0x55000)
+
+// SD Object Bitmap File: 'konami/out/steven.opng'
+#define STEVEN_IMAGE STEVEN_WIDTH,STEVEN_HEIGHT,(uint8_t*)STEVEN_OFFSET
+#define STEVEN_WIDTH (130)
+#define STEVEN_HEIGHT (130)
+#define STEVEN_OFFSET (0x59400)
+
+// SD Object Bitmap File: 'konami/out/vincent.opng'
+#define VINCENT_IMAGE VINCENT_WIDTH,VINCENT_HEIGHT,(uint8_t*)VINCENT_OFFSET
+#define VINCENT_WIDTH (130)
+#define VINCENT_HEIGHT (130)
+#define VINCENT_OFFSET (0x5d800)
+
+// SD Object Bitmap File: 'konami/out/weston.opng'
+#define WESTON_IMAGE WESTON_WIDTH,WESTON_HEIGHT,(uint8_t*)WESTON_OFFSET
+#define WESTON_WIDTH (130)
+#define WESTON_HEIGHT (130)
+#define WESTON_OFFSET (0x61c00)
+
+// SD Object Bitmap File: 'konami/out/will.opng'
+#define WILL_IMAGE WILL_WIDTH,WILL_HEIGHT,(uint8_t*)WILL_OFFSET
+#define WILL_WIDTH (130)
+#define WILL_HEIGHT (130)
+#define WILL_OFFSET (0x66000)
+
+// SD Object Bitmap File: 'konami/out/xxxander.opng'
+#define XXXANDER_IMAGE XXXANDER_WIDTH,XXXANDER_HEIGHT,(uint8_t*)XXXANDER_OFFSET
+#define XXXANDER_WIDTH (130)
+#define XXXANDER_HEIGHT (130)
+#define XXXANDER_OFFSET (0x6a400)
+
+// SD Object Bitmap File: 'konami/out/yanni.opng'
+#define YANNI_IMAGE YANNI_WIDTH,YANNI_HEIGHT,(uint8_t*)YANNI_OFFSET
+#define YANNI_WIDTH (130)
+#define YANNI_HEIGHT (130)
+#define YANNI_OFFSET (0x6e800)
+
