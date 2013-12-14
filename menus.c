@@ -256,8 +256,8 @@ void menu_laser_run(){
 int length_digits[3];
 
 void menu_length_render(){
-    uint8_t shallow_color = (setting_depth < 80) ? COLOR_GREEN : COLOR_BLACK;
-    uint8_t deep_color = (setting_depth > 80) ? COLOR_GREEN : COLOR_BLACK;
+    uint8_t shallow_color = (setting_depth < 80) ? COLOR_BLACK : COLOR_PINK;
+    uint8_t deep_color = (setting_depth > 80) ? COLOR_BLACK : COLOR_PINK;
     
     draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, shallow_color);
     draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, deep_color);
@@ -266,9 +266,9 @@ void menu_length_render(){
 }
 
 void menu_length_recalc(){
-    length_digits[0] = setting_length % 10;
+    length_digits[2] = setting_length % 10;
     length_digits[1] = (setting_length / 10) % 10;
-    length_digits[2] = (setting_length / 100) % 10; // Shouldn't be more than 9
+    length_digits[0] = (setting_length / 100) % 10; // Shouldn't be more than 9
 }
 
 void menu_length_init(){
@@ -291,7 +291,7 @@ void menu_length_run(){
     if(length_state == 1){
         // Hundreds Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length > 100){
+            if(setting_length > 200){
                 setting_length -= 100;
             }
         }
@@ -303,7 +303,7 @@ void menu_length_run(){
     }else if(length_state == 2){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length > 100){
+            if(setting_length > 110){
                 setting_length -= 10;
             }
         }
@@ -315,7 +315,7 @@ void menu_length_run(){
     }else if(length_state == 3){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length > 100){
+            if(setting_length > 101){
                 setting_length -= 1;
             }
         }
