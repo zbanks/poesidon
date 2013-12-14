@@ -83,55 +83,57 @@ const uint8_t TXT_WOW_DATA[225] = {0xFF,0xFF,0xA7,0x42,0x3,0xFF,0xFF,0xFF,0xFF,0
 
 // SD Object Bitmap File: 'konami/title.opng'
 
-// SD Object Bitmap File: 'konami/out/ac.opng'
+// SD Object Bitmap File: 'konami/out/000_xxxander.opng'
 
-// SD Object Bitmap File: 'konami/out/acrefoot.opng'
+// SD Object Bitmap File: 'konami/out/001_dan.opng'
 
-// SD Object Bitmap File: 'konami/out/adam.opng'
+// SD Object Bitmap File: 'konami/out/002_ac.opng'
 
-// SD Object Bitmap File: 'konami/out/austin.opng'
+// SD Object Bitmap File: 'konami/out/003_jonny.opng'
 
-// SD Object Bitmap File: 'konami/out/banks.opng'
+// SD Object Bitmap File: 'konami/out/004_adam.opng'
 
-// SD Object Bitmap File: 'konami/out/brian.opng'
+// SD Object Bitmap File: 'konami/out/005_banks.opng'
 
-// SD Object Bitmap File: 'konami/out/dan.opng'
+// SD Object Bitmap File: 'konami/out/006_brian.opng'
 
-// SD Object Bitmap File: 'konami/out/duncan.opng'
+// SD Object Bitmap File: 'konami/out/007_emele.opng'
 
-// SD Object Bitmap File: 'konami/out/emele.opng'
+// SD Object Bitmap File: 'konami/out/008_jake.opng'
 
-// SD Object Bitmap File: 'konami/out/eric.opng'
+// SD Object Bitmap File: 'konami/out/009_weston.opng'
 
-// SD Object Bitmap File: 'konami/out/herbert.opng'
+// SD Object Bitmap File: 'konami/out/010_max.opng'
 
-// SD Object Bitmap File: 'konami/out/ivan.opng'
+// SD Object Bitmap File: 'konami/out/011_herbert.opng'
 
-// SD Object Bitmap File: 'konami/out/jake.opng'
+// SD Object Bitmap File: 'konami/out/012_marvin.opng'
 
-// SD Object Bitmap File: 'konami/out/jonny.opng'
+// SD Object Bitmap File: 'konami/out/013_eric.opng'
 
-// SD Object Bitmap File: 'konami/out/kamal.opng'
+// SD Object Bitmap File: 'konami/out/014_sherin.opng'
 
-// SD Object Bitmap File: 'konami/out/marvin.opng'
+// SD Object Bitmap File: 'konami/out/015_peter.opng'
 
-// SD Object Bitmap File: 'konami/out/max.opng'
+// SD Object Bitmap File: 'konami/out/016_will.opng'
 
-// SD Object Bitmap File: 'konami/out/peter.opng'
+// SD Object Bitmap File: 'konami/out/017_steven.opng'
 
-// SD Object Bitmap File: 'konami/out/sadun.opng'
+// SD Object Bitmap File: 'konami/out/018_duncan.opng'
 
-// SD Object Bitmap File: 'konami/out/sherin.opng'
+// SD Object Bitmap File: 'konami/out/019_yanni.opng'
 
-// SD Object Bitmap File: 'konami/out/steven.opng'
+// SD Object Bitmap File: 'konami/out/020_sadun.opng'
 
-// SD Object Bitmap File: 'konami/out/vincent.opng'
+// SD Object Bitmap File: 'konami/out/021_ivan.opng'
 
-// SD Object Bitmap File: 'konami/out/weston.opng'
+// SD Object Bitmap File: 'konami/out/022_austin.opng'
 
-// SD Object Bitmap File: 'konami/out/will.opng'
+// SD Object Bitmap File: 'konami/out/023_acrefoot.opng'
 
-// SD Object Bitmap File: 'konami/out/xxxander.opng'
+// SD Object Bitmap File: 'konami/out/024_clark.opng'
 
-// SD Object Bitmap File: 'konami/out/yanni.opng'
+// SD Object Bitmap File: 'konami/out/025_vincent.opng'
+
+// SD Object Bitmap File: 'konami/out/026_kamal.opng'
 
