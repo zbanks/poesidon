@@ -24,6 +24,18 @@ extern const uint8_t DOT_DATA[800];
 #define LINE_HEIGHT (80)
 extern const uint8_t LINE_DATA[1600];
 
+// Bitmap File: 'images/mermaid.png'
+#define MERMAID_IMAGE MERMAID_WIDTH,MERMAID_HEIGHT,(uint8_t*)MERMAID_DATA
+#define MERMAID_WIDTH (130)
+#define MERMAID_HEIGHT (130)
+extern const uint8_t MERMAID_DATA[16900];
+
+// Sprite File: 'images/period.spng'
+#define PERIOD_IMAGE PERIOD_WIDTH,PERIOD_HEIGHT,(uint8_t*)PERIOD_DATA
+#define PERIOD_WIDTH (56)
+#define PERIOD_HEIGHT (17)
+extern const uint8_t PERIOD_DATA[476];
+
 // Bitmap File: 'images/poesidon_doge_1.png'
 #define POESIDON_DOGE_1_IMAGE POESIDON_DOGE_1_WIDTH,POESIDON_DOGE_1_HEIGHT,(uint8_t*)POESIDON_DOGE_1_DATA
 #define POESIDON_DOGE_1_WIDTH (130)
@@ -150,6 +162,12 @@ extern const uint8_t TXT_MUCH_LENGTH_DATA[693];
 #define TXT_SO_SHALLOW_HEIGHT (87)
 extern const uint8_t TXT_SO_SHALLOW_DATA[1088];
 
+// Sprite File: 'images/txt_such_long_tiem.spng'
+#define TXT_SUCH_LONG_TIEM_IMAGE TXT_SUCH_LONG_TIEM_WIDTH,TXT_SUCH_LONG_TIEM_HEIGHT,(uint8_t*)TXT_SUCH_LONG_TIEM_DATA
+#define TXT_SUCH_LONG_TIEM_WIDTH (18)
+#define TXT_SUCH_LONG_TIEM_HEIGHT (92)
+extern const uint8_t TXT_SUCH_LONG_TIEM_DATA[828];
+
 // Sprite File: 'images/txt_such_speed.spng'
 #define TXT_SUCH_SPEED_IMAGE TXT_SUCH_SPEED_WIDTH,TXT_SUCH_SPEED_HEIGHT,(uint8_t*)TXT_SUCH_SPEED_DATA
 #define TXT_SUCH_SPEED_WIDTH (18)
@@ -162,8 +180,3 @@ extern const uint8_t TXT_SUCH_SPEED_DATA[621];
 #define TXT_WOW_HEIGHT (25)
 extern const uint8_t TXT_WOW_DATA[225];
 
-// SD Object Bitmap File: 'konami/title.opng'
-#define TITLE_IMAGE TITLE_WIDTH,TITLE_HEIGHT,(uint8_t*)TITLE_OFFSET
-#define TITLE_WIDTH (130)
-#define TITLE_HEIGHT (130)
-#define TITLE_OFFSET (0x0)
