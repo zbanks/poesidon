@@ -31,3 +31,5 @@ void lcd_blit_sprite(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint8_t* img,uint
 uint8_t read_buttons();
 uint8_t read_buttons_debounced();
 void busy_wait(uint32_t nCount);
+void init_sd();
+void lcd_blit_sd(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint32_t addr);

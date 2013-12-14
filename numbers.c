@@ -31,7 +31,6 @@ void blit_number(uint8_t x,uint8_t y,int num,uint8_t* bg,uint8_t color)
   uint8_t digits[10];
   int n=0;
   int next;
-  number_t const * img;
 
   do
   {
@@ -41,11 +40,6 @@ void blit_number(uint8_t x,uint8_t y,int num,uint8_t* bg,uint8_t color)
   } while(num>0);
   for(n=n-1;n>=0;n--)
   {
-    /*
-    img=&digit_img[digits[n]];
-    lcd_blit_sprite(x,y,img->dx,img->dy,img->img,bg,color);
-    y+=img->dy;
-    */
     y += blit_digit(x, y, digits[n], bg, color);
   }
 }

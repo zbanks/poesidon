@@ -982,9 +982,6 @@
       <name>$PROJ_DIR$\..\sd.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\sd_read.c</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\..\stm32f10x_it.c</name>
     </file>
   </group>
