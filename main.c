@@ -11,6 +11,7 @@ int main(void)
   init_sd();
 
   init_menu();
+  for(;;)
   {
       render_menu();
   }
