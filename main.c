@@ -13,7 +13,7 @@ int main(void)
   init_menu();
   for(;;)
   {
-      render_menu();
+    render_menu();
   }
 }
 
