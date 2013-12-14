@@ -2,7 +2,6 @@
 #include "hal.h"
 #include "images.h"
 #include "menus.h"
-#include "sd_read.h"
 
 int main(void)
 {
@@ -12,6 +11,7 @@ int main(void)
   init_sd();
 
   init_menu();
+  for(;;)
   {
       render_menu();
   }

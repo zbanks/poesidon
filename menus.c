@@ -17,6 +17,9 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 #define LENGTH_BG_IMAGE POESIDON_DOGE_1_IMAGE
 #define LENGTH_BG_DATA POESIDON_DOGE_1_DATA
 
+#define KONAMI_SEQUENCE_STEP 512*34
+#define KONAMI_SEQUENCE_LENGTH 3
+
 // The main settings menu
 void menu_main_init();
 void menu_main_run();
@@ -41,6 +44,7 @@ void menu_splash_run();
 // The konami code
 void menu_konami_init();
 void menu_konami_run();
+void menu_konami_redraw();
 
 // Run
 void menu_wow_init();
@@ -48,6 +52,7 @@ void menu_wow_run();
 void menu_wow_deinit();
 
 int splash_timeout;
+int konami_index;
 
 typedef struct {
   void (* const init)();
@@ -136,6 +141,9 @@ void render_menu()
             konami_counter++;
         }else{
             konami_counter = 0;
+            if(buttons_edge == konami_code[konami_counter]){
+              konami_counter++;
+            }
         }
         if(konami_counter == 10){
             //TODO
@@ -391,12 +399,36 @@ void menu_splash_run()
 }
 
 void menu_konami_init(){
+  konami_index=0;
+  menu_konami_redraw();
+}
 
+void menu_konami_redraw()
+{
+  lcd_blit_sd(0,0,dxLCDScreen,dyLCDScreen,konami_index*KONAMI_SEQUENCE_STEP);
 }
 
 void menu_konami_run(){
-    //TODO
-    state = &menu_main;
+  if(buttons_edge & (BUTTON_RIGHT | BUTTON_A))
+  {
+    if(konami_index < KONAMI_SEQUENCE_LENGTH)
+    {
+      konami_index++;
+      menu_konami_redraw();
+    }
+  }
+  else if(buttons_edge & BUTTON_LEFT)
+  {
+    if(konami_index > 0)
+    {
+      konami_index--;
+      menu_konami_redraw();
+    }
+  }
+  else if(buttons_edge & BUTTON_B)
+  {
+    state=&menu_main;
+  }
 }
 
 void menu_wow_init()
