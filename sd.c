@@ -793,7 +793,7 @@ SD_Error SD_GoIdleState(void)
     SD_CS_LOW();
     
     /*!< Send CMD1 (Activates the card process) until response equal to 0x0 */
-    SD_SendCmd(SD_CMD_SEND_OP_COND, 0, 0xFF);
+    SD_SendCmd(SD_CMD_SEND_OP_COND, 0x00, 0xFF);
     /*!< Wait for no error Response (R1 Format) equal to 0x00 */
   }
   while (SD_GetResponse(SD_RESPONSE_NO_ERROR));

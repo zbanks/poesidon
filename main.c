@@ -10,8 +10,8 @@ int main(void)
   busy_wait(100000);
   init_lcd();
   
-  sd_read();
-  for(;;);
+  //sd_read();
+  //for(;;);
   
   init_menu();
   for(;;)
