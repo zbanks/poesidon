@@ -51,6 +51,8 @@ void menu_wow_init();
 void menu_wow_run();
 void menu_wow_deinit();
 
+uint8_t rand();
+
 int splash_timeout;
 int konami_index;
 
@@ -96,13 +98,13 @@ const sprite_t sprites[] = {
   {90, 48, TXT_MUCH_LENGTH_IMAGE, COLOR_GREEN},
   {25, 20, TXT_SUCH_SPEED_IMAGE, COLOR_BLUE},
   {10, 90, TXT_WOW_IMAGE, COLOR_ORANGE},
-  {80, 20, CIRCLE_IMAGE, COLOR_GREEN},
-  {62, 36, SQUARE_IMAGE, COLOR_GREEN},
-  {90, 70, DOT_IMAGE, COLOR_GREEN},
-  {10, 25, LINE_IMAGE, COLOR_GREEN},
-  {111, 10, TXT_SO_SHALLOW_IMAGE, COLOR_BLACK},
-  {83, 20, TXT_MUCH_DEEP_IMAGE, COLOR_BLACK},
-  {55, 17, TXT_HOW_MANY_FEAT_LONG_IMAGE, COLOR_ORANGE},
+  {80, 8, CIRCLE_IMAGE, COLOR_GREEN},
+  {62, 86, SQUARE_IMAGE, COLOR_GREEN},
+  {35, 21, DOT_IMAGE, COLOR_GREEN},
+  {5, 25, LINE_IMAGE, COLOR_GREEN},
+  {108, 10, TXT_SO_SHALLOW_IMAGE, COLOR_BLACK},
+  {83, 27, TXT_MUCH_DEEP_IMAGE, COLOR_BLACK},
+  {65, 6, TXT_HOW_MANY_FEAT_LONG_IMAGE, COLOR_BLUE},
 };
 
 inline void draw_sprite(enum sprite_names s, const uint8_t* bg);
@@ -113,7 +115,7 @@ const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, B
 shape_t setting_laser_shape = LINE;
 int setting_depth = 100;
 int setting_length = 450;
-int setting_speed = 5;
+int setting_speed = 200;
 
 int wow_start_time;
 int wow_last_time;
@@ -264,13 +266,13 @@ void menu_laser_run(){
 int length_digits[3];
 
 void menu_length_render(){
-    uint8_t shallow_color = (setting_depth < 80) ? COLOR_BLACK : COLOR_GREEN;
-    uint8_t deep_color = (setting_depth > 80) ? COLOR_BLACK : COLOR_GREEN;
+    uint8_t shallow_color = (setting_depth > 80) ? COLOR_BLACK : COLOR_GREEN;
+    uint8_t deep_color = (setting_depth < 80) ? COLOR_BLACK : COLOR_GREEN;
     
     draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, shallow_color);
     draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, deep_color);
 
-    blit_number(10, 10, setting_length, (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
+    blit_number(3, 33, setting_length, (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
 }
 
 void menu_length_recalc(){
@@ -354,7 +356,7 @@ void menu_length_run(){
         if(buttons_edge & (BUTTON_DOWN | BUTTON_UP)){
             menu_length_recalc();
         }
-        blit_digit(10, 10 + digit_dy, length_digits[length_state -1], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
+        blit_digit(3,33 + digit_dy, length_digits[length_state -1], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
     } 
 
     if(buttons_edge & (BUTTON_RIGHT)){
@@ -384,13 +386,102 @@ void menu_length_run(){
     }
 }
 
-void menu_speed_init(){
+int speed_digits[3];
 
+
+void menu_speed_render(){
+
+
+    blit_number(30, 30, setting_speed, (uint8_t*) LENGTH_BG_DATA, COLOR_BLUE);
 }
+
+void menu_speed_recalc(){
+    speed_digits[2] = setting_speed % 10;
+    speed_digits[1] = (setting_speed / 10) % 10;
+    speed_digits[0] = (setting_speed / 100) % 10; // Shouldn't be more than 9
+}
+
+void menu_speed_init(){
+    lcd_blit_mem(0, 0, LENGTH_BG_IMAGE);
+    draw_sprite(TXT_HOW_MANY_FEAT_LONG_SPRITE, LENGTH_BG_DATA);
+    menu_speed_recalc();
+    menu_speed_render();
+}
+
 
 void menu_speed_run(){
     //TODO
-    state = &menu_main;
+  static uint8_t speed_state = 0;
+    int digit_dy;
+    uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
+
+    // Assume fixed-width font because lazy
+    digit_dy = digit_img[0].dy * (speed_state );
+    
+    if(speed_state == 1){
+        // Hundreds Digit
+        if(buttons_edge & BUTTON_DOWN){
+            if(setting_speed > 200){
+                setting_speed -= 100;
+            }
+        }
+        if(buttons_edge & BUTTON_UP){
+            if(setting_speed < 900){
+                setting_speed += 100;
+            }
+        }
+    }else if(speed_state == 2){
+        // Tens Digit
+        if(buttons_edge & BUTTON_DOWN){
+            if(setting_speed > 110){
+                setting_speed -= 10;
+            }
+        }
+        if(buttons_edge & BUTTON_UP){
+            if(setting_speed < 990){
+                setting_speed += 10;
+            }
+        }
+    }else if(speed_state == 3){
+        // Tens Digit
+        if(buttons_edge & BUTTON_DOWN){
+            if(setting_speed > 101){
+                setting_speed -= 1;
+            }
+        }
+        if(buttons_edge & BUTTON_UP){
+            if(setting_speed < 999){
+                setting_speed += 1;
+            }
+        }
+    }
+
+
+      if(buttons_edge & (BUTTON_DOWN | BUTTON_UP)){
+          menu_speed_recalc();
+      }
+      blit_digit(30,30 + digit_dy, speed_digits[speed_state], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
+   
+
+    if(buttons_edge & (BUTTON_RIGHT)){
+        if(speed_state == 1 || speed_state == 0){
+            speed_state++;
+            menu_speed_render();
+        }
+    }
+    if((buttons_edge & BUTTON_LEFT)){
+        if(speed_state == 2 || speed_state == 1){
+            speed_state--;
+            menu_speed_render();
+        }
+    }
+
+    if(buttons_edge & (BUTTON_A | BUTTON_B)){
+        speed_state = 0;
+        digit_dy = 0;
+        state = &menu_main;
+    }
+
 }
 
 void menu_splash_init()
@@ -471,6 +562,9 @@ void menu_wow_run()
       rainbow_counter=0;
     }
     wow_last_time=wow_time;
+    if(wow_time != 0){
+      lcd_blit_sprite(rand() & 0x7F, rand() & 0x7F, TXT_WOW_IMAGE, (uint8_t*) SWIMMING_DATA, RAINBOW[rainbow_counter]);
+    }
   }
 
   project(setting_laser_shape,setting_depth,setting_length,setting_speed,time-wow_start_time);
@@ -480,4 +574,10 @@ void menu_wow_run()
     menu_wow_deinit();
     state=&menu_main;
   }
+}
+
+uint8_t rand_base = 0;
+
+uint8_t rand(){
+    return (rand_base + ((time & 0xff00) >> 8)) ^ ((time & 0x00ff) * rand_base++);
 }
