@@ -1,3 +1,6 @@
+#ifndef ___MENUS_H__
+#define ___MENUS_H__
+
 #include <stdint.h>
 #include "project.h"
 
@@ -22,3 +25,4 @@ extern int setting_speed;
 void init_menu();
 void render_menu();
 
+#endif

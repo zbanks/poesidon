@@ -380,6 +380,7 @@ void lcd_blit_sprite(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint8_t* img,uint
   int i,j;
   uint32_t reversed;
   uint8_t fgc,out;
+  uint8_t c = 0;
 
   lcd_setup_write(x,y,dx,dy);
   
@@ -389,8 +390,14 @@ void lcd_blit_sprite(uint8_t x,uint8_t y,uint8_t dx,uint8_t dy,uint8_t* img,uint
   {
     for(i=0;i<dx;i++)
     {
-      fgc=(*img & 0xE0)>>5;
-      img++;
+      if(!c){
+          fgc = (*img & 0xE0)>>5;
+          c = 1;
+      }else{
+          fgc=(*img & 0x0E)>>1;
+          img++;
+          c = 0;
+      }
       
       if(fgc==7)
       {

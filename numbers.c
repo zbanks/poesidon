@@ -3,12 +3,6 @@
 #include "hal.h"
 #include "project.h"
 
-typedef struct
-{
-  uint8_t dx,dy;
-  uint8_t* img;
-} number_t;
-
 const number_t digit_img[10]={
   {TXT_0_IMAGE},
   {TXT_1_IMAGE},
@@ -21,6 +15,16 @@ const number_t digit_img[10]={
   {TXT_8_IMAGE},
   {TXT_9_IMAGE},
 };
+
+uint8_t blit_digit(uint8_t x,uint8_t y,int n,uint8_t* bg,uint8_t color){
+    number_t const * img;
+    if(n < 0 || n > 9){
+        return;
+    }
+    img = &digit_img[n];
+    lcd_blit_sprite(x, y, img->dx, img->dy, img->img, bg, color);
+    return img->dy;
+}
 
 void blit_number(uint8_t x,uint8_t y,int num,uint8_t* bg,uint8_t color)
 {
@@ -37,8 +41,11 @@ void blit_number(uint8_t x,uint8_t y,int num,uint8_t* bg,uint8_t color)
   } while(num>0);
   for(n=n-1;n>=0;n--)
   {
+    /*
     img=&digit_img[digits[n]];
     lcd_blit_sprite(x,y,img->dx,img->dy,img->img,bg,color);
     y+=img->dy;
+    */
+    y += blit_digit(x, y, digits[n], bg, color);
   }
 }
