@@ -226,7 +226,7 @@
         <option>
           <name>CCAllowList</name>
           <version>1</version>
-          <state>1111111</state>
+          <state>0000000</state>
         </option>
         <option>
           <name>CCDebugInfo</name>
@@ -317,7 +317,7 @@
         </option>
         <option>
           <name>CCOptLevel</name>
-          <state>3</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCOptStrategy</name>
@@ -326,7 +326,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>3</state>
+          <state>0</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -949,6 +949,9 @@
       <name>$PROJ_DIR$\..\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.c</name>
     </file>
     <file>
@@ -974,6 +977,12 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\project.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\sd.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\sd_read.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\stm32f10x_it.c</name>

@@ -1,6 +1,7 @@
 #include "stm32f10x.h"
 #include "stm32f10x_tim.h"
 #include "stm32f10x_usart.h"
+#include "stm32f10x_spi.h"
 #include "hal.h"
 
 GPIO_InitTypeDef GPIO_InitStructure;
@@ -17,7 +18,8 @@ void hardware_init()
                          RCC_APB2Periph_GPIOB | 
                          RCC_APB2Periph_GPIOC | 
                          RCC_APB2Periph_TIM1 | 
-                         RCC_APB2Periph_AFIO, ENABLE);
+                         RCC_APB2Periph_AFIO | 
+                         RCC_APB2Periph_SPI1, ENABLE);
 
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
   
@@ -107,6 +109,37 @@ void hardware_init()
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 
+  // SD Card
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 |
+                                GPIO_Pin_4 |
+                                GPIO_Pin_5;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+  GPIO_SetBits(GPIOA, GPIO_Pin_15);
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+  GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);
+  GPIO_PinRemapConfig(GPIO_Remap_SPI1,ENABLE);
+  
+  SPI_InitTypeDef SPI_InitStructure;
+  SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+  SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+  SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+  SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+  SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+  SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+  SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_16;
+  SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+  SPI_InitStructure.SPI_CRCPolynomial = 7;
+  SPI_Init(SPI1, &SPI_InitStructure);
+
+  /* Enable SPIy */
+  SPI_Cmd(SPI1, ENABLE);
+  
   // Systick on
   SysTick_Config(SystemCoreClock / 1000);
 }
