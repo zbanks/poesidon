@@ -383,7 +383,7 @@ void menu_speed_run(){
 
 void menu_splash_init()
 {
-  splash_timeout=2000;
+  splash_timeout=time+2000;
   lcd_blit_mem(0, 0, SPLASH_IMAGE);
 }
 
@@ -392,7 +392,7 @@ void menu_splash_run()
   int rainbow_ctr = (time/RAINBOW_PERIOD) % sizeof(RAINBOW);
   lcd_blit_sprite(7, 23, SPLASH_TXT_IMAGE, (uint8_t*) SPLASH_DATA, RAINBOW[rainbow_ctr]);
 
-  if((!splash_timeout--) || (buttons & BUTTON_A))
+  if((time>splash_timeout) || (buttons & BUTTON_A))
   {
       state=&menu_main;
   }
