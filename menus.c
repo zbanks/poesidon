@@ -100,8 +100,8 @@ const sprite_t sprites[] = {
   {62, 36, SQUARE_IMAGE, COLOR_GREEN},
   {90, 70, DOT_IMAGE, COLOR_GREEN},
   {10, 25, LINE_IMAGE, COLOR_GREEN},
-  {111, 10, TXT_SO_SHALLOW_IMAGE, COLOR_ORANGE},
-  {83, 20, TXT_MUCH_DEEP_IMAGE, COLOR_ORANGE},
+  {111, 10, TXT_SO_SHALLOW_IMAGE, COLOR_BLACK},
+  {83, 20, TXT_MUCH_DEEP_IMAGE, COLOR_BLACK},
   {55, 17, TXT_HOW_MANY_FEAT_LONG_IMAGE, COLOR_ORANGE},
 };
 
@@ -264,8 +264,8 @@ void menu_laser_run(){
 int length_digits[3];
 
 void menu_length_render(){
-    uint8_t shallow_color = (setting_depth < 80) ? COLOR_BLACK : COLOR_PINK;
-    uint8_t deep_color = (setting_depth > 80) ? COLOR_BLACK : COLOR_PINK;
+    uint8_t shallow_color = (setting_depth < 80) ? COLOR_BLACK : COLOR_GREEN;
+    uint8_t deep_color = (setting_depth > 80) ? COLOR_BLACK : COLOR_GREEN;
     
     draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, shallow_color);
     draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, deep_color);
@@ -357,12 +357,24 @@ void menu_length_run(){
         blit_digit(10, 10 + digit_dy, length_digits[length_state -1], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
     } 
 
-    if(buttons_edge & (BUTTON_A | BUTTON_LEFT)){
-        length_state = (length_state + 1) % 4;
-        menu_length_render();
+    if(buttons_edge & (BUTTON_RIGHT)){
+        if(length_state == 1 || length_state == 2){
+            length_state++;
+            menu_length_render();
+        }
     }
-    if((buttons_edge & BUTTON_RIGHT)){
-        length_state = (length_state - 1) % 4;
+    if((buttons_edge & BUTTON_LEFT)){
+        if(length_state == 2 || length_state == 3){
+            length_state--;
+            menu_length_render();
+        }
+    }
+    if(buttons_edge & (BUTTON_A)){
+        if(length_state == 0){
+            length_state = 1;
+        }else{
+            length_state = 0;
+        }
         menu_length_render();
     }
     if(buttons_edge & BUTTON_B){

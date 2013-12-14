@@ -15,6 +15,7 @@ typedef uint8_t btn_t;
 #define COLOR_CYAN 0x1F
 #define COLOR_WHITE 0xFF
 #define COLOR_BLACK 0x00
+#define COLOR_GREY 0x92
 
 extern shape_t setting_laser_shape;
 extern int setting_depth;
