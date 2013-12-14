@@ -19,7 +19,7 @@ const number_t digit_img[10]={
 uint8_t blit_digit(uint8_t x,uint8_t y,int n,uint8_t* bg,uint8_t color){
     number_t const * img;
     if(n < 0 || n > 9){
-        return;
+        return 0;
     }
     img = &digit_img[n];
     lcd_blit_sprite(x, y, img->dx, img->dy, img->img, bg, color);

@@ -1,3 +1,4 @@
+
 #include <menus.h>
 #include <hal.h>
 #include <images.h>
@@ -114,11 +115,11 @@ int wow_last_time;
 
 // Begin Functions
 
-void init_menu()
-{
-  state=&menu_splash;
+void init_menu(){
+  state = &menu_splash;
   state->init();
 }
+
 
 void render_menu()
 {
@@ -266,7 +267,7 @@ void menu_length_render(){
 void menu_length_recalc(){
     length_digits[0] = setting_length % 10;
     length_digits[1] = (setting_length / 10) % 10;
-    legnth_digits[2] = (setting_length / 100) % 10; // Shouldn't be more than 9
+    length_digits[2] = (setting_length / 100) % 10; // Shouldn't be more than 9
 }
 
 void menu_length_init(){
