@@ -27,7 +27,7 @@ with open("images.h", "w") as fh:
                 sprites = fname.endswith(".spng")
                 obj = fname.endswith(".opng")
 
-                if not obj or not sprites:
+                if not obj and not sprites:
                     fh.write("// Bitmap File: '{}'\n".format(fname))
                     fc.write("// Bitmap File: '{}'\n".format(fname))
                     pixels=','.join(['0x{0:X}'.format(condense(*pix)) for pix in im.getdata()])
