@@ -482,10 +482,10 @@ uint8_t read_buttons_debounced()
         debounced &= ~(1<<i);
       }
     }
-    else if(state && debounce[i]<3)
+    else if(state && debounce[i]<4)
     {
       debounce[i]++;
-      if(debounce[i] > 2)
+      if(debounce[i] > 3)
       {
         debounced |= 1<<i;
       }

@@ -128,29 +128,13 @@ void init_menu(){
 
 void render_menu()
 {
-    // The main function to render the current menu 
-    static state_t const* old_state;
-    static uint8_t konami_counter = 0;
-    static btn_t last_buttons = 0x00;
-    buttons = read_buttons_debounced();
-    buttons_edge = buttons & ~last_buttons;
-    last_buttons = buttons;
-
-    if(buttons_edge){
-        if(buttons_edge == konami_code[konami_counter]){
-            konami_counter++;
-        }else{
-            konami_counter = 0;
-            if(buttons_edge == konami_code[konami_counter]){
-              konami_counter++;
-            }
-        }
-        if(konami_counter == 10){
-            //TODO
-            konami_counter = 0;
-            state = &menu_konami;
-        }
-    }
+  // The main function to render the current menu 
+  static state_t const* old_state;
+  static uint8_t konami_counter = 0;
+  static btn_t last_buttons = 0x00;
+  buttons = read_buttons_debounced();
+  buttons_edge = buttons & ~last_buttons;
+  last_buttons = buttons;
 
   if(state != old_state)
   {
@@ -159,6 +143,22 @@ void render_menu()
 
   old_state=state;
   state->run();
+  
+  if(buttons_edge){
+    if(buttons_edge == konami_code[konami_counter]){
+        konami_counter++;
+    }else{
+        konami_counter = 0;
+        if(buttons_edge == konami_code[konami_counter]){
+          konami_counter++;
+        }
+    }
+    if(konami_counter == 10){
+        //TODO
+        konami_counter = 0;
+        state = &menu_konami;
+    }
+}
 }
 
 
@@ -395,7 +395,7 @@ void menu_speed_run(){
 
 void menu_splash_init()
 {
-  splash_timeout=2000;
+  splash_timeout=time+2000;
   lcd_blit_mem(0, 0, SPLASH_IMAGE);
 }
 
@@ -404,7 +404,7 @@ void menu_splash_run()
   int rainbow_ctr = (time/RAINBOW_PERIOD) % sizeof(RAINBOW);
   lcd_blit_sprite(7, 23, SPLASH_TXT_IMAGE, (uint8_t*) SPLASH_DATA, RAINBOW[rainbow_ctr]);
 
-  if((!splash_timeout--) || (buttons & BUTTON_A))
+  if((time>splash_timeout) || (buttons & BUTTON_A))
   {
       state=&menu_main;
   }
