@@ -2,7 +2,6 @@
 #include "hal.h"
 #include "images.h"
 #include "menus.h"
-#include "sd_read.h"
 
 int main(void)
 {
