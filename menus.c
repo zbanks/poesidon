@@ -18,7 +18,7 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 #define LENGTH_BG_DATA POESIDON_DOGE_1_DATA
 
 #define KONAMI_SEQUENCE_STEP 512*34
-#define KONAMI_SEQUENCE_LENGTH 3
+#define KONAMI_SEQUENCE_LENGTH 29
 
 // The main settings menu
 void menu_main_init();
@@ -418,7 +418,7 @@ void menu_speed_run(){
     // Assume fixed-width font because lazy
     digit_dy = digit_img[0].dy * (speed_state );
     
-    if(speed_state == 1){
+    if(speed_state == 0){
         // Hundreds Digit
         if(buttons_edge & BUTTON_DOWN){
             if(setting_speed > 200){
@@ -430,7 +430,7 @@ void menu_speed_run(){
                 setting_speed += 100;
             }
         }
-    }else if(speed_state == 2){
+    }else if(speed_state == 1){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
             if(setting_speed > 110){
@@ -442,7 +442,7 @@ void menu_speed_run(){
                 setting_speed += 10;
             }
         }
-    }else if(speed_state == 3){
+    }else if(speed_state == 2){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
             if(setting_speed > 101){
@@ -520,17 +520,13 @@ void menu_konami_run(){
       menu_konami_redraw();
     }
   }
-  else if(buttons_edge & BUTTON_LEFT)
+  else if(buttons_edge & (BUTTON_LEFT | BUTTON_B))
   {
     if(konami_index > 0)
     {
       konami_index--;
       menu_konami_redraw();
     }
-  }
-  else if(buttons_edge & BUTTON_B)
-  {
-    state=&menu_main;
   }
 }
 
@@ -553,7 +549,7 @@ void menu_wow_run()
   static uint8_t rainbow_counter=0;
   int wow_time;
 
-  wow_time=(time-wow_start_time)/(setting_speed*1000);
+  wow_time=(time-wow_start_time)/(setting_speed*10);
   if(wow_time != wow_last_time)
   {
     blit_number(10,50,wow_time,(uint8_t*)SWIMMING_DATA,RAINBOW[rainbow_counter++]);
