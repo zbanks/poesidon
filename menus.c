@@ -18,7 +18,7 @@ uint8_t RAINBOW[7]={0xE0,0xF4,0xFC,0x1C,0x1F,0x4B,0xE3};
 #define LENGTH_BG_DATA POESIDON_DOGE_1_DATA
 
 #define KONAMI_SEQUENCE_STEP 512*34
-#define KONAMI_SEQUENCE_LENGTH 29
+#define KONAMI_SEQUENCE_LENGTH 27
 
 // The main settings menu
 void menu_main_init();
@@ -113,9 +113,9 @@ inline void draw_sprite_color(enum sprite_names s, const uint8_t* bg, uint8_t co
 const uint8_t konami_code[] = {BUTTON_UP, BUTTON_UP, BUTTON_DOWN, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A};
 
 shape_t setting_laser_shape = LINE;
-int setting_depth = 100;
-int setting_length = 450;
-int setting_speed = 200;
+int setting_depth = 30;
+int setting_length = 150;
+int setting_speed = 100;
 
 int wow_start_time;
 int wow_last_time;
@@ -160,7 +160,7 @@ void render_menu()
         konami_counter = 0;
         state = &menu_konami;
     }
-}
+  }
 }
 
 
@@ -264,15 +264,21 @@ void menu_laser_run(){
 }
 
 int length_digits[3];
+const int length_digit_dy[]={0,25,60};
+
+#define LENGTH_NUM_X 10
+#define LENGTH_NUM_Y 35
 
 void menu_length_render(){
-    uint8_t shallow_color = (setting_depth > 80) ? COLOR_BLACK : COLOR_GREEN;
-    uint8_t deep_color = (setting_depth < 80) ? COLOR_BLACK : COLOR_GREEN;
+    uint8_t shallow_color = (setting_depth > 50) ? COLOR_BLACK : COLOR_GREEN;
+    uint8_t deep_color = (setting_depth < 50) ? COLOR_BLACK : COLOR_GREEN;
     
     draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, shallow_color);
     draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, deep_color);
 
-    blit_number(3, 33, setting_length, (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
+    blit_digit(LENGTH_NUM_X, LENGTH_NUM_Y+length_digit_dy[0], length_digits[0], (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
+    blit_digit(LENGTH_NUM_X, LENGTH_NUM_Y+length_digit_dy[1], length_digits[1], (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
+    blit_digit(LENGTH_NUM_X, LENGTH_NUM_Y+length_digit_dy[2], length_digits[2], (uint8_t*) LENGTH_BG_DATA, COLOR_RED);
 }
 
 void menu_length_recalc(){
@@ -286,68 +292,62 @@ void menu_length_init(){
     draw_sprite(TXT_HOW_MANY_FEAT_LONG_SPRITE, LENGTH_BG_DATA);
     menu_length_recalc();
     menu_length_render();
-    
-
 }
 
 void menu_length_run(){
     static uint8_t length_state = 0;
-    int digit_dy;
     uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
-
-    // Assume fixed-width font because lazy
-    digit_dy = digit_img[0].dy * (length_state - 1);
-    
+  
     if(length_state == 1){
         // Hundreds Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length > 200){
+            if(setting_length >= 200){
                 setting_length -= 100;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_length < 900){
+            if(setting_length <= 900){
                 setting_length += 100;
             }
         }
     }else if(length_state == 2){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length > 110){
+            if(setting_length >= 110){
                 setting_length -= 10;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_length < 990){
+            if(setting_length <= 990){
                 setting_length += 10;
             }
         }
     }else if(length_state == 3){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_length > 101){
+            if(setting_length >= 101){
                 setting_length -= 1;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_length < 999){
+            if(setting_length <= 999){
                 setting_length += 1;
             }
         }
     }
 
     if(length_state == 0){
-        if(setting_depth < 80){
+        if(setting_depth < 50){
             if(buttons_edge & (BUTTON_DOWN)){
                 draw_sprite(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 100;
+                setting_depth = 60;
             }else{
                 draw_sprite_color(TXT_SO_SHALLOW_SPRITE, LENGTH_BG_DATA, rainbow_color);
             }
         }else{
             if(buttons_edge & (BUTTON_UP)){
                 draw_sprite(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA);
-                setting_depth = 50;
+                setting_depth = 30;
             }else{
                 draw_sprite_color(TXT_MUCH_DEEP_SPRITE, LENGTH_BG_DATA, rainbow_color);
             }
@@ -357,8 +357,8 @@ void menu_length_run(){
             menu_length_recalc();
             menu_length_render();
         }
-        blit_digit(3,33 + digit_dy, length_digits[length_state -1], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
-    } 
+        blit_digit(LENGTH_NUM_X,LENGTH_NUM_Y + length_digit_dy[length_state-1], length_digits[length_state-1], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
+    }
 
     if(buttons_edge & (BUTTON_RIGHT)){
         if(length_state == 1 || length_state == 2){
@@ -382,18 +382,22 @@ void menu_length_run(){
     }
     if(buttons_edge & BUTTON_B){
         length_state = 0;
-        digit_dy = 0;
         state = &menu_main;
     }
 }
 
 int speed_digits[3];
 
+const int speed_digit_dy[]={0,25,60};
 
-void menu_speed_render(){
+#define SPEED_NUM_X 10
+#define SPEED_NUM_Y 35
 
-
-    blit_number(30, 30, setting_speed, (uint8_t*) LENGTH_BG_DATA, COLOR_BLUE);
+void menu_speed_render()
+{
+    blit_digit(SPEED_NUM_X, SPEED_NUM_Y+speed_digit_dy[0], speed_digits[0], (uint8_t*) LENGTH_BG_DATA, COLOR_BLUE);
+    blit_digit(SPEED_NUM_X, SPEED_NUM_Y+speed_digit_dy[1], speed_digits[1], (uint8_t*) LENGTH_BG_DATA, COLOR_BLUE);
+    blit_digit(SPEED_NUM_X, SPEED_NUM_Y+speed_digit_dy[2], speed_digits[2], (uint8_t*) LENGTH_BG_DATA, COLOR_BLUE);
 }
 
 void menu_speed_recalc(){
@@ -412,58 +416,53 @@ void menu_speed_init(){
 
 void menu_speed_run(){
     //TODO
-  static uint8_t speed_state = 0;
-    int digit_dy;
+    static uint8_t speed_state = 0;
     uint8_t rainbow_color = RAINBOW[(time/RAINBOW_PERIOD) % sizeof(RAINBOW)];
-
-    // Assume fixed-width font because lazy
-    digit_dy = digit_img[0].dy * (speed_state );
-    
+   
     if(speed_state == 0){
         // Hundreds Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_speed > 200){
+            if(setting_speed >= 200){
                 setting_speed -= 100;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_speed < 900){
+            if(setting_speed <= 900){
                 setting_speed += 100;
             }
         }
     }else if(speed_state == 1){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_speed > 110){
+            if(setting_speed >= 60){
                 setting_speed -= 10;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_speed < 990){
+            if(setting_speed <= 990){
                 setting_speed += 10;
             }
         }
     }else if(speed_state == 2){
         // Tens Digit
         if(buttons_edge & BUTTON_DOWN){
-            if(setting_speed > 101){
+            if(setting_speed >= 51){
                 setting_speed -= 1;
             }
         }
         if(buttons_edge & BUTTON_UP){
-            if(setting_speed < 999){
+            if(setting_speed <= 999){
                 setting_speed += 1;
             }
         }
     }
 
-
       if(buttons_edge & (BUTTON_DOWN | BUTTON_UP)){
           menu_speed_recalc();
           menu_speed_render();
       }
-      blit_digit(30,30 + digit_dy, speed_digits[speed_state], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
-   
+      blit_digit(SPEED_NUM_X,SPEED_NUM_Y + speed_digit_dy[speed_state], speed_digits[speed_state], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
+
 
     if(buttons_edge & (BUTTON_RIGHT)){
         if(speed_state == 1 || speed_state == 0){
@@ -480,7 +479,6 @@ void menu_speed_run(){
 
     if(buttons_edge & (BUTTON_A | BUTTON_B)){
         speed_state = 0;
-        digit_dy = 0;
         state = &menu_main;
     }
 
@@ -488,7 +486,7 @@ void menu_speed_run(){
 
 void menu_splash_init()
 {
-  splash_timeout=time+2000;
+  splash_timeout=time+6000;
   lcd_blit_mem(0, 0, SPLASH_IMAGE);
 }
 
@@ -530,6 +528,7 @@ void menu_konami_run(){
       menu_konami_redraw();
     }
   }
+  busy_wait(1000);
 }
 
 void menu_wow_init()
@@ -551,21 +550,22 @@ void menu_wow_run()
   static uint8_t rainbow_counter=0;
   int wow_time;
 
-  wow_time=(time-wow_start_time)/(setting_speed*10);
+  wow_time=(time-wow_start_time)/(setting_speed*100);
   if(wow_time != wow_last_time)
   {
+    if(wow_time != 0){
+      lcd_blit_sprite(rand() & 0x7F, rand() & 0x7F, TXT_WOW_IMAGE, (uint8_t*) SWIMMING_DATA, RAINBOW[rainbow_counter]);
+    }
+
     blit_number(10,50,wow_time,(uint8_t*)SWIMMING_DATA,RAINBOW[rainbow_counter++]);
     if(rainbow_counter>sizeof(RAINBOW))
     {
       rainbow_counter=0;
     }
     wow_last_time=wow_time;
-    if(wow_time != 0){
-      lcd_blit_sprite(rand() & 0x7F, rand() & 0x7F, TXT_WOW_IMAGE, (uint8_t*) SWIMMING_DATA, RAINBOW[rainbow_counter]);
-    }
   }
 
-  project(setting_laser_shape,setting_depth,setting_length,setting_speed,time-wow_start_time);
+  project(setting_laser_shape,setting_depth,setting_length,setting_speed*100,time-wow_start_time);
   
   if(buttons & BUTTON_B)
   {

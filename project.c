@@ -56,19 +56,23 @@ int32_t square(int32_t amp,int32_t half_period,int32_t time)
 
 void project(shape_t shape,int depth,int length,int speed,int t)
 {
-  int ya=get_mirror_angle(ramp(length,speed*1000,t),depth);
+  int ya=get_mirror_angle(ramp(length,speed,t),depth);
   int xa=5000;
 
   switch(shape)
   {
   case SQUARE:
     xa+=square(200,40,t+20);
-    ya+=square(100,40,t);    
+    ya+=square(200,40,t);    
     break;
   case DOT:
     break;
   case LINE:
-    xa+=square(1000,40,t);
+    xa+=square(1000,20,t);
+    break;
+  case CIRCLE:
+    xa+=square(200,20,t+10);
+    ya+=square(200,20,t);   
     break;
   }
   set_laser_pos(xa,ya);

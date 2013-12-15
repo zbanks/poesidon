@@ -279,7 +279,7 @@ static const uint16_t lcd_init[]={
   LCD_PACK(lctCmd, SLPOUT),	// Sleep Out (exit sleep mode)
 
   LCD_PACK(lctCmd, VOLCTR),	// Electronic Volume Control (brightness/contrast)
-  LCD_PACK(lctData, 55),
+  LCD_PACK(lctData, 48),
   LCD_PACK(lctData, 3),
 
   LCD_PACK(lctCmd, TMPGRD),
