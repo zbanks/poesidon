@@ -355,6 +355,7 @@ void menu_length_run(){
     }else{
         if(buttons_edge & (BUTTON_DOWN | BUTTON_UP)){
             menu_length_recalc();
+            menu_length_render();
         }
         blit_digit(3,33 + digit_dy, length_digits[length_state -1], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
     } 
@@ -459,6 +460,7 @@ void menu_speed_run(){
 
       if(buttons_edge & (BUTTON_DOWN | BUTTON_UP)){
           menu_speed_recalc();
+          menu_speed_render();
       }
       blit_digit(30,30 + digit_dy, speed_digits[speed_state], (uint8_t*) LENGTH_BG_DATA, rainbow_color);
    

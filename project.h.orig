@@ -1,0 +1,19 @@
+#ifndef __PROJECT_H
+#define __PROJECT_H
+
+#include <stdint.h>
+
+typedef enum {
+<<<<<<< HEAD
+    CIRCLE,
+    SQUARE,
+=======
+>>>>>>> 5ec6c4fb82c68cb68c41d46d187a3eed88729329
+    DOT,
+    LINE,
+    LAST_SHAPE = LINE
+} shape_t;
+
+void project(shape_t shape,int depth,int length,int speed,int t);
+
+#endif
